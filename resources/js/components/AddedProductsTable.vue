@@ -1,5 +1,6 @@
 <template>
     <table class="table striped">
+        <caption>Monto total de la venta: </caption>
         <thead>
         <tr>
             <th scope="col">NOMBRE</th>

@@ -159,7 +159,7 @@ export default {
 
             try {
                 let response = await axios.get('products');
-
+                console.log(response)
                 this.products = [...response.data]
 
                 return response
