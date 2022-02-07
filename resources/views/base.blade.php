@@ -45,6 +45,9 @@
                     <a class="nav-link" aria-current="page" href="{{ route('providers.index') }}">Proveedores</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{route('usuarios.index')}}">Usuarios</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">Estadísticas (proximamente)</a>
                 </li>
             </ul>

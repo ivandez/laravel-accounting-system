@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,6 +83,9 @@ Route::middleware(['auth'])->group(function (){
         Route::post('/delete/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
         Route::get('/buscar', [ProductController::class, 'query'])->name('products.query');
     });
+
+    // Users
+    Route::resource('/usuarios', UserController::class);
 });
 
 
