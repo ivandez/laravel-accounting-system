@@ -2373,7 +2373,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         product_price: product.unit_price
       };
       this.form.productos.push(newProduct);
-      console.log(JSON.stringify(newProduct));
     },
     handleRemove: function handleRemove(id) {
       var filteredProducts = this.form.productos.filter(function (product) {
@@ -2499,15 +2498,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddedProductsTable",
   props: {
     data: []
   },
+  data: function data() {
+    return {
+      total: 0
+    };
+  },
   methods: {
     sendProducId: function sendProducId(id) {
       this.$emit('listenChild', id);
+    },
+    sumTotal: function sumTotal() {
+      var _this = this;
+
+      this.data.forEach(function (x) {
+        _this.total += Number(x.product_price);
+      });
     }
+  },
+  beforeUpdate: function beforeUpdate() {
+    console.log('hijo actualizado');
+    this.sumTotal();
   }
 });
 
@@ -21459,7 +21476,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("table", { staticClass: "table striped" }, [
-    _c("caption", [_vm._v("Monto total de la venta: ")]),
+    _c("caption", [_vm._v("Monto total de la venta: $" + _vm._s(this.total))]),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
@@ -21470,6 +21487,8 @@ var render = function () {
           _c("td", [_vm._v(_vm._s(element.name))]),
           _vm._v(" "),
           _c("td", [_vm._v(_vm._s(element.quantity))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(element.product_price))]),
           _vm._v(" "),
           _c("td", [
             _c(
@@ -21502,6 +21521,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("NOMBRE")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("CANTIDAD")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio por unidad")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("OPCIONES")]),
       ]),

@@ -211,7 +211,6 @@ export default {
 
             this.form.productos.push(newProduct)
 
-            console.log((JSON.stringify(newProduct)))
         },
         handleRemove(id) {
             const filteredProducts = this.form.productos.filter((product) => product.id !== id)
