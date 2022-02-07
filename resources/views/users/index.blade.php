@@ -45,18 +45,24 @@
                             @else
                                 <th>empleado</th>
                             @endif
-                            @if($user->id == 1)
-                                <td>
-                                    <a href="{{ route('usuarios.show', $user->id) }}" type="button"
-                                       class="btn btn-primary">Ver</a>
-                                </td>
+                            @if(auth()->user()->rol == 1)
+                                @if($user->id == 1)
+                                    <td>
+                                        <a href="{{ route('usuarios.show', $user->id) }}" type="button"
+                                           class="btn btn-primary">Ver</a>
+                                    </td>
+                                @else
+                                    <td>
+                                        <a href="a" type="button"
+                                           class="btn btn-primary">Ver</a>
+                                        <form action="{{route('usuarios.destroy', $user)}}" class="d-inline" method="post">
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </form>
+                                    </td>
+                                @endif
                             @else
                                 <td>
-                                    <a href="a" type="button"
-                                       class="btn btn-primary">Ver</a>
-                                    <form action="a" class="d-inline" method="post">
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                    </form>
                                 </td>
                             @endif
                         </tr>
@@ -74,5 +80,5 @@
         </div>
 
     </div>
-
+{{--// TODO si el usuario es admin que no pueda modificar el usuario principal ni pueda eliminar su propia cuenta--}}
 @endsection
