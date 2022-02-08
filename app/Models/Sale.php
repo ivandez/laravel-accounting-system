@@ -28,7 +28,7 @@ class Sale extends Model
         $total = 0;
 
         foreach ($this->products as $product) {
-            $total += $product->pivot->product_price;
+            $total += $product->pivot->product_price * $product->pivot->quantity;
         }
 
         return $total;
