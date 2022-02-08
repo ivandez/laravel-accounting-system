@@ -18,6 +18,7 @@ class CreateSalesTable extends Migration
             $table->string('comment')->nullable();
             $table->date('date');
             $table->boolean('is_paid');
+            $table->string('serial_number');
             $table->unsignedBigInteger('client_id')->nullable();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->unsignedBigInteger('payment_method_id');

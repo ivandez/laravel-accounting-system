@@ -84,6 +84,8 @@ class SaleController extends Controller
 
         $sale->payment_method_id = $request->metodo_de_pago;
 
+        $sale->serial_number = Sale::getSerialNumber();
+
         $sale->save();
 
         foreach ($request->productos as $product){

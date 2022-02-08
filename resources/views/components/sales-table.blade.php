@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th scope="col">Cliente o proveedor</th>
+        <th scope="col">Serial</th>
         <th scope="col">Monto</th>
         <th scope="col">Comentario</th>
         <th scope="col">Método de pago</th>
@@ -13,6 +14,7 @@
     @foreach($sales as $sale)
         <tr>
             <th>{{$sale->client?->first_name}}</th>
+            <th>{{$sale->serial_number}}</th>
             <th>${{$sale->sumProductPrice()}}</th>
             <th>{{$sale->comment}}</th>
             <th>{{$sale->paymentMethod->name}}</th>
