@@ -91,6 +91,6 @@ Route::middleware(['auth'])->group(function (){
 
 
 // TODO tests controllers delete this
-Route::get('ventas-totales', [\App\Http\Controllers\TestController::class, 'getGanaciasTotales']);
+Route::get('ventas-totales', [\App\Http\Controllers\TestController::class, 'getTotalSales']);
 Route::get('gastos-totales', [\App\Http\Controllers\TestController::class, 'getTotalExpenses']);
 Route::get('utilidad', [\App\Http\Controllers\TestController::class, 'utilidad']);

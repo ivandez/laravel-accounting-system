@@ -15,15 +15,15 @@ class GetBalanceService
      * Retonar las ganacias totales
      * @return float
      */
-    public function getTotalEarnings(): float
+    public function getTotalEarnings()
     {
-        $productSale = DB::table('sales')
+        return $productSale = DB::table('sales')
             ->join('product_sale', 'sales.id', '=', 'product_sale.sale_id')
             ->select('product_sale.quantity', 'product_sale.product_price', 'product_cost')
             ->where('sales.is_paid', true)
             ->get();
 
-        $result = $productSale->map(function ($item) {
+        return $result = $productSale->map(function ($item) {
             return ( $item->quantity * $item->product_price ) - ( $item->quantity * $item->product_cost );
         });
 
@@ -44,9 +44,36 @@ class GetBalanceService
      * ganacias totales - gastos totales
      * @return float
      */
-    public function getTotalUtility(): float
+    public function getTotalUtility() // ventas totales - gastos totales
     {
-        return $this->getTotalEarnings() - $this->getTotalExpenses();
+        return  $this->getTotalSales() - $this->getTotalExpenses();
+    }
+
+    /**
+     * Retorna las ventas totales
+     * ganacias totales - gastos totales
+     * @return float
+     */
+    public function getTotalSales()
+    {
+        $productSale = DB::table('sales')
+            ->join('product_sale', 'sales.id', '=', 'product_sale.sale_id')
+            ->select('product_sale.quantity', 'product_sale.product_price', 'product_cost')
+            ->where('sales.is_paid', true)
+            ->get();
+
+        $result = $productSale->map(function ($item) {
+            return ( $item->quantity * $item->product_price );
+        });
+
+        return $result->sum();
     }
 
 }
+
+
+/**
+ * Gastos totales
+ * Ganacias totales
+ * Utilidad: ganacia
+ */

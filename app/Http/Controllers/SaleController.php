@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Services\GetBalanceService;
 use Illuminate\Http\Request;
 
 
 class SaleController extends Controller
 {
+    private GetBalanceService $getBalanceService;
+
+    public function __construct(GetBalanceService $getBalanceService)
+    {
+        $this->getBalanceService = $getBalanceService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +25,15 @@ class SaleController extends Controller
      */
     public function index()
     {
+        $ventasTotales =  $this->getBalanceService->getTotalSales();
+
+        $gastosTotales =  $this->getBalanceService->getTotalExpenses();
+
+        $utilidadTotal =  $this->getBalanceService->getTotalUtility();
+
         $sales = Sale::where('is_paid', true)->latest()->paginate(15);
 
-        return view('sales.index', compact('sales'));
+        return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal'));
     }
 
     /**

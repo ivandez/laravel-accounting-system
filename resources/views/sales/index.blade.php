@@ -20,7 +20,7 @@
 
         <div class="row mt-3">
             <div class="col d-flex align-items-center justify-content-center">
-                <x-utility-card/>
+                <x-utility-card :ventasTotales="$ventasTotales" :gastosTotales="$gastosTotales" :utilidadTotal="$utilidadTotal"/>
             </div>
         </div>
 
