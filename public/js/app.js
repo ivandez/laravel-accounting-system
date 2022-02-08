@@ -2216,6 +2216,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -2247,7 +2248,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         pagado: null,
         fecha: null,
         metodo_de_pago: null
-      }
+      },
+      total: 0
     };
   },
   methods: {
@@ -2371,14 +2373,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: product.name,
         quantity: this.quantity,
         product_price: product.unit_price
-      };
+      }; // crear la logica aqui
+
       this.form.productos.push(newProduct);
+      this.sumTotal(newProduct);
     },
     handleRemove: function handleRemove(id) {
       var filteredProducts = this.form.productos.filter(function (product) {
         return product.id !== id;
       });
+      var theFuckingProduct = this.form.productos.find(function (product) {
+        return product.id == id;
+      });
       this.form.productos = _toConsumableArray(filteredProducts);
+      this.restaTotal(theFuckingProduct);
     },
     submitData: function submitData() {
       var _this5 = this;
@@ -2426,6 +2434,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var today = new Date();
       var actualDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
       return actualDate;
+    },
+    sumTotal: function sumTotal(newProduct) {
+      this.total += Number(newProduct.product_price) * newProduct.quantity;
+    },
+    restaTotal: function restaTotal(theFuckingProduct) {
+      this.total -= Number(theFuckingProduct.product_price) * theFuckingProduct.quantity;
     }
   },
   mounted: function mounted() {
@@ -2503,28 +2517,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AddedProductsTable",
   props: {
-    data: []
-  },
-  data: function data() {
-    return {
-      total: 0
-    };
+    data: [],
+    total: 0
   },
   methods: {
     sendProducId: function sendProducId(id) {
       this.$emit('listenChild', id);
-    },
-    sumTotal: function sumTotal() {
-      var _this = this;
-
-      this.data.forEach(function (x) {
-        _this.total += Number(x.product_price);
-      });
     }
-  },
-  beforeUpdate: function beforeUpdate() {
-    console.log('hijo actualizado');
-    this.sumTotal();
   }
 });
 
@@ -21123,7 +21122,7 @@ var render = function () {
                         " (Cantidad disponible: " +
                         product.quantity +
                         ")"
-                    ) + "\n                        "
+                    ) + "\n                    "
                   ),
                 ]
               )
@@ -21175,7 +21174,7 @@ var render = function () {
           { staticClass: "col" },
           [
             _c("added-products-table", {
-              attrs: { data: _vm.form.productos },
+              attrs: { data: _vm.form.productos, total: _vm.total },
               on: { listenChild: _vm.handleRemove },
             }),
           ],
@@ -21227,7 +21226,7 @@ var render = function () {
                 [
                   _vm._v(
                     _vm._s(client.first_name + client.last_name) +
-                      "\n                        "
+                      "\n                    "
                   ),
                 ]
               )
@@ -21300,11 +21299,7 @@ var render = function () {
                 staticClass: "form-check-label",
                 attrs: { for: "flexRadioDefault1" },
               },
-              [
-                _vm._v(
-                  "\n                            Pagado\n                        "
-                ),
-              ]
+              [_vm._v("\n                        Pagado\n                    ")]
             ),
           ]),
           _vm._v(" "),
@@ -21336,7 +21331,7 @@ var render = function () {
               },
               [
                 _vm._v(
-                  "\n                            Por pagar\n                        "
+                  "\n                        Por pagar\n                    "
                 ),
               ]
             ),
@@ -21392,9 +21387,9 @@ var render = function () {
                 },
                 [
                   _vm._v(
-                    "\n                            " +
+                    "\n                        " +
                       _vm._s(paymentMethod.name) +
-                      "\n                        "
+                      "\n                    "
                   ),
                 ]
               )

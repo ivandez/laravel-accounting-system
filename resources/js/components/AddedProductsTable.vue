@@ -25,26 +25,12 @@ export default {
     name: "AddedProductsTable",
     props: {
         data: [],
-    },
-    data: function (){
-        return {
-            total: 0
-        }
+        total: 0
     },
     methods: {
         sendProducId(id){
             this.$emit('listenChild' ,id)
-        },
-        sumTotal(){
-
-            this.data.forEach(x => {
-                this.total += Number(x.product_price);
-            });
         }
-    },
-    beforeUpdate(){
-        console.log('hijo actualizado')
-        this.sumTotal()
     }
 }
 </script>

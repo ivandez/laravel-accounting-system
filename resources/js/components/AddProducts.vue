@@ -28,7 +28,7 @@
                     </select>
                 </div>
                 <div class="col">
-<!--                    //TODO: validar que no pueda introducr el zero-->
+                    <!--                    //TODO: validar que no pueda introducr el zero-->
                     <input type="number" class="form-control" min="1" value="form.quantity" v-model="quantity">
                 </div>
                 <div class="col">
@@ -39,7 +39,8 @@
             <!--        ADDED PRODUCTS TABLE-->
             <div class="row">
                 <div class="col">
-                    <added-products-table :data="form.productos" @listenChild="handleRemove"></added-products-table>
+                    <added-products-table :data="form.productos" :total="total"
+                                          @listenChild="handleRemove"></added-products-table>
                 </div>
             </div>
 
@@ -150,7 +151,8 @@ export default {
                 pagado: null,
                 fecha: null,
                 metodo_de_pago: null,
-            }
+            },
+            total: 0
         }
     },
     methods: {
@@ -208,14 +210,16 @@ export default {
                 quantity: this.quantity,
                 product_price: product.unit_price,
             };
-
+            // crear la logica aqui
             this.form.productos.push(newProduct)
 
+            this.sumTotal(newProduct)
         },
         handleRemove(id) {
             const filteredProducts = this.form.productos.filter((product) => product.id !== id)
-
+            const theFuckingProduct = this.form.productos.find((product) => product.id == id)
             this.form.productos = [...filteredProducts]
+            this.restaTotal(theFuckingProduct)
         },
         async submitData() {
             axios.defaults.baseURL = 'http://localhost/api/';
@@ -255,10 +259,16 @@ export default {
 
             return actualDate;
         },
+        sumTotal(newProduct) {
+            this.total += Number(newProduct.product_price) * newProduct.quantity
+        },
+        restaTotal(theFuckingProduct) {
+            this.total -= Number(theFuckingProduct.product_price) * theFuckingProduct.quantity
+        }
     },
     async mounted() {
-        await this.getProducts().then( response => {
-            if( response.data.length == 0 ){
+        await this.getProducts().then(response => {
+            if (response.data.length == 0) {
                 window.alert('No hay productos en el inventario, por favor agrega un producto');
 
                 window.location.href = 'http://localhost/productos';
