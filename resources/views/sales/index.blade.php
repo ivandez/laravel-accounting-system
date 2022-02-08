@@ -19,6 +19,12 @@
         @endif
 
         <div class="row mt-3">
+            <div class="col d-flex align-items-center justify-content-center">
+                <x-utility-card/>
+            </div>
+        </div>
+
+        <div class="row mt-3">
             <div class="col">
                 <x-search-bar url="{{ route('sales.query') }}"/>
             </div>
