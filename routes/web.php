@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/buscar', [SaleController::class, 'query'])->name('sales.query');
         Route::get('/crear', [SaleController::class, 'create'])->name('sales.create');
         Route::get('/por-cobrar', [SaleController::class, 'toPay'])->name('sales.toPay');
+        Route::get('/invoce/{sale}', [SaleController::class, 'getInvoice'])->name('sales.getInvoice');
         Route::put('/update-status/{sale}', [SaleController::class, 'updateStatus'])->name('sales.updateStatus');
     });
 
@@ -94,3 +95,4 @@ Route::middleware(['auth'])->group(function (){
 Route::get('ventas-totales', [\App\Http\Controllers\TestController::class, 'getTotalSales']);
 Route::get('gastos-totales', [\App\Http\Controllers\TestController::class, 'getTotalExpenses']);
 Route::get('utilidad', [\App\Http\Controllers\TestController::class, 'utilidad']);
+Route::get('invoice', [\App\Http\Controllers\TestController::class, 'invoice']);

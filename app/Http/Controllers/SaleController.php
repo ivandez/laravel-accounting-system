@@ -6,16 +6,19 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Services\GetBalanceService;
+use App\Services\InvoceService;
 use Illuminate\Http\Request;
 
 
 class SaleController extends Controller
 {
     private GetBalanceService $getBalanceService;
+    private InvoceService $invoiceServie;
 
-    public function __construct(GetBalanceService $getBalanceService)
+    public function __construct(GetBalanceService $getBalanceService, InvoceService $invoiceServie)
     {
         $this->getBalanceService = $getBalanceService;
+        $this->invoiceServie = $invoiceServie;
     }
 
     /**
@@ -192,5 +195,10 @@ class SaleController extends Controller
         $sales = Sale::where('is_paid', false)->get();
 
         return view('sales.to-pay')->with('sales', $sales);
+    }
+
+    public function getInvoice(Sale $sale)
+    {
+        return $this->invoiceServie->getInvoice($sale);
     }
 }
