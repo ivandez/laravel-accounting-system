@@ -7,7 +7,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\UserController;
-
+use \App\Http\Controllers\BussinesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -87,6 +87,10 @@ Route::middleware(['auth'])->group(function (){
 
     // Users
     Route::resource('/usuarios', UserController::class);
+
+    // Bussines
+    Route::resource('/empresa', BussinesController::class);
+
 });
 
 
