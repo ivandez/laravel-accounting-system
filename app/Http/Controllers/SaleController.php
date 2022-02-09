@@ -185,4 +185,12 @@ class SaleController extends Controller
 
         return redirect()->route('sales.toPay')->with('success', '¡Venta pagada exitosamente!');
     }
+
+    public function porCobrar()
+    {
+        return 'por pagar';
+        $sales = Sale::where('is_paid', false)->get();
+
+        return view('sales.to-pay')->with('sales', $sales);
+    }
 }

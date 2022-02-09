@@ -107,22 +107,11 @@ class ExpenseController extends Controller
      * @param  \App\Models\Sale  $sale
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sale $sale)
+    public function destroy(Expense $expense)
     {
+        $expense->delete();
 
-        foreach ($sale->products as $product){
-            $p = Product::find($product['id']);
-
-            $p->quantity += $product->pivot->quantity;
-
-            $p->save();
-        }
-
-        $sale->products()->detach();
-
-        $sale->delete();
-
-        return redirect()->route('sales.index')->with('success', '¡Venta eliminada exitosamente!');
+        return redirect()->route('expense.index')->with('success', '¡Gasto eliminado exitosamente!');
     }
 
     public function query()
@@ -130,19 +119,19 @@ class ExpenseController extends Controller
         return 'look for sale uh? xd';
     }
 
-    public function toPay()
+    public function porPagar()
     {
-        $sales = Sale::where('is_paid', false)->get();
+        $expenses = Expense::where('is_paid', false)->get();
 
-        return view('sales.to-pay')->with('sales', $sales);
+        return view('expenses.por-pagar')->with('expenses', $expenses);
     }
 
-    public function updateStatus(Sale $sale)
+    public function updateStatus(Expense $expense)
     {
-        $sale->is_paid = true;
+        $expense->is_paid = true;
 
-        $sale->save();
+        $expense->save();
 
-        return redirect()->route('sales.toPay')->with('success', '¡Venta pagada exitosamente!');
+        return redirect()->route('expense.index')->with('success', '¡Pago pagado exitosamente!');
     }
 }

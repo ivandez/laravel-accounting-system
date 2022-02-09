@@ -6,7 +6,7 @@
 
         <div class="row mt-3">
             <div class="col">
-                <h3>Ventas por cobrar</h3>
+                <h3>Gastos por pagar</h3>
             </div>
         </div>
 
@@ -26,13 +26,13 @@
 
         <div class="row mt-3">
             <div class="col">
-                <a href="{{ route('sales.create') }}" type="button" class="btn btn-success">Agregar nueva venta</a>
+                <a href="{{ route('expense.create') }}" type="button" class="btn btn-success">Agregar nuevo gasto</a>
             </div>
         </div>
 
         <div class="row mt-3">
             <div class="col">
-                <x-to-pay-sales :sales="$sales"/>
+                <x-por-pagar-expenses :expenses="$expenses"/>
             </div>
         </div>
 

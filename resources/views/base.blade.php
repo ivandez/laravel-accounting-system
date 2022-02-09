@@ -31,8 +31,8 @@
                         Deudas
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Por Cobrar</a></li>
-                        <li><a class="dropdown-item" href="{{ route('sales.toPay') }}">Por pagar</a></li>
+                        <li><a class="dropdown-item" href="{{ route('sales.toPay') }}">Por cobrar</a></li>
+                        <li><a class="dropdown-item" href="{{ route('expense.porPagar') }}">Por pagar</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

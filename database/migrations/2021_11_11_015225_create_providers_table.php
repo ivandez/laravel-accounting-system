@@ -17,8 +17,8 @@ class CreateProvidersTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name')->nullable();
-            $table->string('phone_number');
-            $table->string('comment');
+            $table->string('phone_number')->nullable();
+            $table->string('comment')->nullable();
             $table->string('document')->nullable();
             $table->unsignedBigInteger('document_type_id')->nullable();
             $table->foreign('document_type_id')->references('id')->on('documents_types');

@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function (){
         Route::post('/delete/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
         Route::get('/buscar', [SaleController::class, 'query'])->name('sales.query');
         Route::get('/crear', [SaleController::class, 'create'])->name('sales.create');
-        Route::get('/por-pagar', [SaleController::class, 'toPay'])->name('sales.toPay');
+        Route::get('/por-cobrar', [SaleController::class, 'toPay'])->name('sales.toPay');
         Route::put('/update-status/{sale}', [SaleController::class, 'updateStatus'])->name('sales.updateStatus');
     });
 
@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function (){
         Route::post('/delete/{expense}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
         Route::get('/buscar', [ExpenseController::class, 'query'])->name('expense.query');
         Route::get('/crear', [ExpenseController::class, 'create'])->name('expense.create');
-        Route::get('/por-pagar', [ExpenseController::class, 'toPay'])->name('expense.toPay');
+        Route::get('/por-pagar', [ExpenseController::class, 'porPagar'])->name('expense.porPagar');
         Route::put('/update-status/{expense}', [ExpenseController::class, 'updateStatus'])->name('expense.updateStatus');
     });
 
