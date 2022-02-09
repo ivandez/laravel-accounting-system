@@ -15,6 +15,12 @@ class CreateBussinesTable extends Migration
     {
         Schema::create('bussines', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('rif')->nullable();
+            $table->string('phone_number1')->nullable();
+            $table->string('phone_number2')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

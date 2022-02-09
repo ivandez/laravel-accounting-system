@@ -14,7 +14,9 @@ class BussinesController extends Controller
      */
     public function index()
     {
-        return view('bussines');
+        $empresa = Bussines::first();
+
+        return view('bussines')->with('empresa', $empresa);
     }
 
     /**
@@ -67,9 +69,17 @@ class BussinesController extends Controller
      * @param  \App\Models\Bussines  $bussines
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bussines $bussines)
+    public function update(Request $request, Bussines $empresa)
     {
-        //
+        $empresa->name = $request->name;
+        $empresa->rif = $request->rif;
+        $empresa->address = $request->address;
+        $empresa->phone_number1 = $request->phone_number1;
+        $empresa->phone_number2 = $request->phone_number2;
+
+        $empresa->save();
+
+        return redirect()->back();
     }
 
     /**

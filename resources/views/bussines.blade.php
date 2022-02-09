@@ -18,12 +18,12 @@
 
             <div class="col">
 
-                <form action="{{ route('usuarios.store') }}" method="post">
-                    @csrf
+                <form action="{{ route('empresa.update', $empresa) }}" method="post">
+                    @csrf @method('PUT')
 
                     <div class="form-group mb-3">
                         <label for="exampleInputName">Nombre de la empresa</label>
-                        <input required type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" name="nombre">
+                        <input required type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" name="name">
                     </div>
 
                     <div class="form-group mb-3">
@@ -33,12 +33,12 @@
 
                     <div class="form-group mb-3">
                         <label for="exampleInputPhoneNumber">Rif:</label>
-                        <input required type="test" class="form-control" name="text" id="costo_unitario">
+                        <input required type="test" class="form-control" name="rif" id="costo_unitario">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="exampleInputPhoneNumber">Número de contacto 1 (opcional):</label>
-                        <input required type="text" min="1" class="form-control" name="phone_number1" id="costo_unitario">
+                        <label for="exampleInputPhoneNumber">Número de contacto 1:</label>
+                        <input type="text" min="1" class="form-control" name="phone_number1" id="costo_unitario">
                     </div>
 
                     <div class="form-group mb-3">

@@ -26,5 +26,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make(env('ADMIN_PASSWORD')),
             'rol' => true,
         ]);
+
+        DB::table('bussines')->insert([
+            'name' => '',
+            'email' => '',
+            'address' => '',
+            'phone_number1' => '',
+            'phone_number2' => '',
+            'rif' => '',
+        ]);
     }
 }
