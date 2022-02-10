@@ -2,16 +2,16 @@
 
 namespace App\Services;
 
+use App\Models\Bussines;
 use LaravelDaily\Invoices\Classes\Buyer;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
+use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
 
 class InvoceService
 {
 
     public function getInvoice($sale){
-
-//        return $sale->client;
 
         if($sale->client){
             $customer = new Buyer([
@@ -38,11 +38,26 @@ class InvoceService
 
         $notes = implode("<br>", $notes);
 
+        $bussines = Bussines::first();
+
+            $client = new Party([
+                'name'          => $bussines->name,
+                'phone'         => $bussines->phone_number1,
+                'custom_fields' => [
+                    'Dirección'        => $bussines->address,
+                    'Teléfono 2'        => $bussines->phone_number2,
+                    'Rif' => $bussines->rif,
+                    'Email' => $bussines->email,
+                ],
+            ]);
+
+
         $invoice = Invoice::make()
             ->series('V')
             ->sequence(str_replace ('V', '', $sale->serial_number))
             ->serialNumberFormat('{SERIES}-{SEQUENCE}')
             ->buyer($customer)
+            ->seller($client)
             ->dateFormat('d/m/Y')
             ->notes($notes)
             ->addItems($items);

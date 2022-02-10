@@ -18,6 +18,14 @@
             </div>
         @endif
 
+        @if (!$empresa->name)
+            <div class="row my-3">
+                <div class="col">
+                    <x-alert variant="alert-warning" message="Necesitas configurar la información de la empresa para crear una venta, por favor ve a Empresa y llena el formulario"/>
+                </div>
+            </div>
+        @endif
+
         <div class="row mt-3">
             <div class="col d-flex align-items-center justify-content-center">
                 <x-utility-card :ventasTotales="$ventasTotales" :gastosTotales="$gastosTotales" :utilidadTotal="$utilidadTotal"/>
@@ -30,11 +38,13 @@
             </div>
         </div>
 
+        @if ($empresa->name)
         <div class="row mt-3">
             <div class="col">
                 <a href="{{ route('sales.create') }}" type="button" class="btn btn-success">Agregar nueva venta</a>
             </div>
         </div>
+        @endif
 
         <div class="row mt-3">
             <div class="col">

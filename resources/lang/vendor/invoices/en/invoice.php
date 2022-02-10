@@ -15,7 +15,7 @@ return [
     'address'                => 'Dirreción',
     'code'                   => 'Code',
     'vat'                    => 'VAT code',
-    'phone'                  => 'Phone',
+    'phone'                  => 'Teléfono',
     'description'            => 'Descripción',
     'units'                  => 'Unidades',
     'quantity'               => 'Cantidad',

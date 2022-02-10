@@ -76,10 +76,11 @@ class BussinesController extends Controller
         $empresa->address = $request->address;
         $empresa->phone_number1 = $request->phone_number1;
         $empresa->phone_number2 = $request->phone_number2;
+        $empresa->email = $request->email;
 
         $empresa->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', '¡Datos guardados exitosamente!');
     }
 
     /**

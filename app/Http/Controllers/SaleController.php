@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bussines;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\Sale;
@@ -28,6 +29,8 @@ class SaleController extends Controller
      */
     public function index()
     {
+        $empresa = Bussines::first();
+
         $ventasTotales =  $this->getBalanceService->getTotalSales();
 
         $gastosTotales =  $this->getBalanceService->getTotalExpenses();
@@ -36,7 +39,7 @@ class SaleController extends Controller
 
         $sales = Sale::where('is_paid', true)->latest()->paginate(15);
 
-        return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal'));
+        return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal', 'empresa'));
     }
 
     /**
