@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\UserController;
 use \App\Http\Controllers\BussinesController;
+use \App\Http\Controllers\StatisticController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,6 +91,9 @@ Route::middleware(['auth'])->group(function (){
 
     // Bussines
     Route::resource('/empresa', BussinesController::class);
+
+    // Statitics
+    Route::get('/estadisticas', [StatisticController::class, 'index'])->name('statistic.index');
 
 });
 

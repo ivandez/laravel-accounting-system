@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -45,4 +46,39 @@ class Product extends Model
 
         return 'P' . sprintf('%07d', intval($number) + 1);
     }
+
+    public static function getMoreSellerProducts()
+    {
+        // product sale organizar por producto y despues por quantity
+        /**
+         * sumar el qunatity
+         * retornar un nuevo arreglo con el nombre y la cantidad
+         * organizar de mayor a menor
+         */
+        $moreSellerProducts =  DB::table('product_sale')
+            ->join('products', 'product_sale.product_id', '=', 'products.id')
+            ->select('product_sale.*', 'products.name')
+            ->get();
+
+        $orgProducts = $moreSellerProducts->groupBy('product_id');
+
+        $asd =  $orgProducts->map(function ($item, $key) {
+            return [
+                "name" => $item[0]->name,
+                "quantity" => $item->sum('quantity')];
+        });
+
+        $newArray = [];
+
+        foreach ($asd as $element){
+            $newArray[] = $element;
+        }
+
+        $colecion = collect($newArray);
+
+        $sorted = $colecion->sortBy('quantity', descending: true);
+
+        return $sorted->values()->all();
+    }
+
 }

@@ -51,7 +51,7 @@
                     <a class="nav-link" aria-current="page" href="{{route('empresa.index')}}">Empresa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Estadísticas (proximamente)</a>
+                    <a class="nav-link" aria-current="page" href="{{ route('statistic.index') }}">Estadísticas</a>
                 </li>
             </ul>
             <div class="d-flex">
