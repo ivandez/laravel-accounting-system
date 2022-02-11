@@ -9,6 +9,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\UserController;
 use \App\Http\Controllers\BussinesController;
 use \App\Http\Controllers\StatisticController;
+use \App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,6 +96,10 @@ Route::middleware(['auth'])->group(function (){
     // Statitics
     Route::get('/estadisticas', [StatisticController::class, 'index'])->name('statistic.index');
 
+    // Report
+    Route::get('/reporte', [ReportController::class, 'index'])->name('report.index');
+    Route::post('/reporte', [ReportController::class, 'getReport'])->name('report.getReport');
+
 });
 
 
@@ -104,3 +109,4 @@ Route::get('ventas-totales', [\App\Http\Controllers\TestController::class, 'getT
 Route::get('gastos-totales', [\App\Http\Controllers\TestController::class, 'getTotalExpenses']);
 Route::get('utilidad', [\App\Http\Controllers\TestController::class, 'utilidad']);
 Route::get('invoice', [\App\Http\Controllers\TestController::class, 'invoice']);
+//Route::get('reporte', [\App\Http\Controllers\TestController::class, 'reporte']);

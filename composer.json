@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laraveldaily/laravel-invoices": "^2.0",
+        "rap2hpoutre/fast-excel": "^3.2",
         "wulfheart/pretty_routes": "^0.3.0"
     },
     "require-dev": {

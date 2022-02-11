@@ -42,8 +42,8 @@
         <div class="row mt-3">
             <div class="col">
                 <a href="{{ route('sales.create') }}" type="button" class="btn btn-success">Agregar nueva venta</a>
+                <a href="/reporte" type="button" class="btn btn-success">Obtener reporte</a>
             </div>
-        </div>
         @endif
 
         <div class="row mt-3">
