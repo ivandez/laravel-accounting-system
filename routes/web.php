@@ -111,3 +111,4 @@ Route::get('utilidad', [\App\Http\Controllers\TestController::class, 'utilidad']
 Route::get('invoice', [\App\Http\Controllers\TestController::class, 'invoice']);
 Route::get('deudas-por-pagar', [\App\Http\Controllers\TestController::class, 'deudasPortPagar']);
 Route::get('deudas-por-cobrar', [\App\Http\Controllers\TestController::class, 'getDeudasPorCobrar']);
+Route::get('clientes-mas', [\App\Http\Controllers\TestController::class, 'clienteMas']);

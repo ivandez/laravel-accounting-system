@@ -94,4 +94,8 @@ class TestController extends Controller
     public function getDeudasPorCobrar(){
         return $this->getBalanceService->getDeudasPorCobrar();
     }
+
+    public function clienteMas(){
+        return $this->getBalanceService->getClientesConMasVentas();
+    }
 }

@@ -24,7 +24,7 @@ class GetBalanceService
             ->get();
 
         return $result = $productSale->map(function ($item) {
-            return ( $item->quantity * $item->product_price ) - ( $item->quantity * $item->product_cost );
+            return ($item->quantity * $item->product_price) - ($item->quantity * $item->product_cost);
         });
 
         return $result->sum();
@@ -46,7 +46,7 @@ class GetBalanceService
      */
     public function getTotalUtility() // ventas totales - gastos totales
     {
-        return  $this->getTotalSales() - $this->getTotalExpenses();
+        return $this->getTotalSales() - $this->getTotalExpenses();
     }
 
     /**
@@ -63,7 +63,7 @@ class GetBalanceService
             ->get();
 
         $result = $productSale->map(function ($item) {
-            return ( $item->quantity * $item->product_price );
+            return ($item->quantity * $item->product_price);
         });
 
         return $result->sum();
@@ -97,6 +97,28 @@ class GetBalanceService
             'count' => $expenses->count(),
             'amount' => $amount->sum()
         ];
+    }
+
+    public function getClientesConMasVentas()
+    {
+
+        $sales = Sale::where('is_paid', true)
+            ->where('client_id', '!=', null)
+            ->get();
+
+        $order = $sales->groupBy('client_id');
+
+
+        $count = $order->map(function ($item) {
+            return [
+                'count' => $item->count(),
+                'client' => $item[0]->client->first_name . ' ' . $item[0]->client->last_name
+            ];
+        });
+
+        $sorted = $count->sortByDesc('count');
+
+        return $sorted->values()->all();
     }
 
 }
