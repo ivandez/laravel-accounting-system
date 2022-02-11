@@ -12,12 +12,22 @@
             </thead>
             <tbody>
             @if(count($products) > 0)
-            @for($i = 0; $i < 3; $i++)
-                <tr>
-                    <th scope="col">{{ $products[$i]['name'] }}</th>
-                    <th scope="col">{{ $products[$i]['quantity'] }}</th>
-                </tr>
-            @endfor
+                @if(count($products) < 3)
+                    @foreach($products as $p)
+                        <tr>
+                            <th scope="col">{{ $p['name'] }}</th>
+                            <th scope="col">{{ $p['quantity'] }}</th>
+                        </tr>
+                    @endforeach
+                @else
+                    @for($i = 0; $i < 3; $i++)
+                        <tr>
+                            <th scope="col">{{ $products[$i]['name'] }}</th>
+                            <th scope="col">{{ $products[$i]['quantity'] }}</th>
+                        </tr>
+                    @endfor
+                @endif
+
             @else
                 <tr>
                     <th scope="col"></th>
