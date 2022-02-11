@@ -22,9 +22,12 @@
             <td>
                 <a href="{{ route('sales.show', $sale->id) }}" type="button" class="btn btn-primary">Ver</a>
                 <a href="{{ route('sales.getInvoice', $sale) }}" target="_blank" type="button" class="btn btn-success">Recibo</a>
-                <form action="{{ route('sales.destroy', $sale) }}" class="d-inline" method="post">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </form>
+                @if(auth()->user()->rol == 1)
+                    <form action="{{ route('sales.destroy', $sale) }}" class="d-inline" method="post">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                @endif
+
             </td>
         </tr>
     @endforeach
