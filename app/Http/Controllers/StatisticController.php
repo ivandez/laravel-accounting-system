@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Services\GetBalanceService;
 
 class StatisticController extends Controller
 {
+    private GetBalanceService $balanceService;
+
+    public function __construct(GetBalanceService $balanceService)
+    {
+        $this->balanceService = $balanceService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +22,18 @@ class StatisticController extends Controller
     public function index()
     {
         $products =  Product::getMoreSellerProducts();
-//        return count($products);
-        return view('statistic.index')->with('products', $products);
+
+        $clientesConMasVentas = $this->balanceService->getClientesConMasVentas();
+
+        $deudasPorCobrar = $this->balanceService->getDeudasPorCobrar();
+
+        $deudasPorPagar = $this->balanceService->getDeudasPorPagar();
+
+        return view('statistic.index')
+            ->with('products', $products)
+            ->with('clientesMasVentas', $clientesConMasVentas)
+            ->with('deudasPorCobrar', $deudasPorCobrar)
+            ->with('deudasPorPagar', $deudasPorPagar);
     }
 
     /**
