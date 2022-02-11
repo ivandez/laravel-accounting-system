@@ -30,12 +30,12 @@
                     @csrf @method('POST')
 
                     <div class="form-group mb-3">
-                        <label for="exampleInputName">Nombre de la empresa</label>
+                        <label for="exampleInputName">Desde:</label>
                         <input required type="date" class="form-control" id="exampleInputName" aria-describedby="nameHelp" name="date">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="exampleInputName">Nombre de la empresa</label>
+                        <label for="exampleInputName">Hasta:</label>
                         <input required type="date" class="form-control" id="exampleInputName" aria-describedby="nameHelp" name="date2">
                     </div>
 
