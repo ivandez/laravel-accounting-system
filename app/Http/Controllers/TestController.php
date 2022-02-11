@@ -86,4 +86,12 @@ class TestController extends Controller
 
         return (new FastExcel($asd))->download('file.xlsx');;
     }
+
+    public function deudasPortPagar(){
+        return $this->getBalanceService->getDeudasPorPagar();
+    }
+
+    public function getDeudasPorCobrar(){
+        return $this->getBalanceService->getDeudasPorCobrar();
+    }
 }

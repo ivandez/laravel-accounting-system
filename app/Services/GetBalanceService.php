@@ -69,11 +69,35 @@ class GetBalanceService
         return $result->sum();
     }
 
+    public function getDeudasPorPagar()
+    {
+
+        $expenses = Expense::where('is_paid', false)->get();
+
+        return [
+            'count' => $expenses->count(),
+            'amount' => $expenses->sum('amount')
+        ];
+    }
+
+    public function getDeudasPorCobrar()
+    {
+
+        $expenses = DB::table('sales')
+            ->join('product_sale', 'sales.id', '=', 'product_sale.sale_id')
+            ->select('product_sale.quantity', 'product_sale.product_price')
+            ->where('sales.is_paid', false)
+            ->get();
+
+        $amount = $expenses->map(function ($item, $key) {
+            return $item->quantity * $item->product_price;
+        });
+
+        return [
+            'count' => $expenses->count(),
+            'amount' => $amount->sum()
+        ];
+    }
+
 }
 
-
-/**
- * Gastos totales
- * Ganacias totales
- * Utilidad: ganacia
- */

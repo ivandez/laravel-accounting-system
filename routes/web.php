@@ -109,4 +109,5 @@ Route::get('ventas-totales', [\App\Http\Controllers\TestController::class, 'getT
 Route::get('gastos-totales', [\App\Http\Controllers\TestController::class, 'getTotalExpenses']);
 Route::get('utilidad', [\App\Http\Controllers\TestController::class, 'utilidad']);
 Route::get('invoice', [\App\Http\Controllers\TestController::class, 'invoice']);
-//Route::get('reporte', [\App\Http\Controllers\TestController::class, 'reporte']);
+Route::get('deudas-por-pagar', [\App\Http\Controllers\TestController::class, 'deudasPortPagar']);
+Route::get('deudas-por-cobrar', [\App\Http\Controllers\TestController::class, 'getDeudasPorCobrar']);
