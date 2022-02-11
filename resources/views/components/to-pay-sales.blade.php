@@ -18,6 +18,8 @@
             <th>{{$sale->paymentMethod->name}}</th>
             <th>{{ formatDatePls($sale->date) }}</th>
             <td>
+                @if(auth()->user()->rol == 1)
+
                 <form action="{{ route('sales.updateStatus', $sale->id) }}" method="post" class="d-inline">
                     @method('PUT')
                     <button type="submit" class="btn btn-primary">Pagar</button>
@@ -25,6 +27,7 @@
                 <form action="{{ route('sales.destroy', $sale) }}" class="d-inline" method="post">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
+                @endif
             </td>
         </tr>
     @endforeach

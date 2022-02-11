@@ -26,7 +26,10 @@
 
         <div class="row mt-3">
             <div class="col">
+                @if(auth()->user()->rol == 1)
+
                 <a href="{{ route('sales.create') }}" type="button" class="btn btn-success">Agregar nueva venta</a>
+                @endif
             </div>
         </div>
 

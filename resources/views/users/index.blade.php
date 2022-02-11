@@ -20,7 +20,10 @@
 
         <div class="row mt-3">
             <div class="col">
+                @if(auth()->user()->rol == 1)
+
                 <a href="{{ route('usuarios.create') }}" type="button" class="btn btn-success">Agregar nuevo usuario</a>
+                @endif
             </div>
         </div>
 

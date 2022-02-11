@@ -25,9 +25,12 @@
         </div>
 
         <div class="row mt-3">
+            @if(auth()->user()->rol == 1)
+
             <div class="col">
                 <a href="{{ route('expense.create') }}" type="button" class="btn btn-success">Agregar nuevo gasto</a>
             </div>
+            @endif
         </div>
 
         <div class="row mt-3">
