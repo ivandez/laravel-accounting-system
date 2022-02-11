@@ -148,8 +148,12 @@ class ProductController extends Controller
             ->orWhere('cost_price', 'LIKE',"%{$request->parametro}%")
             ->orWhere('description', 'LIKE',"%{$request->parametro}%")
             ->orWhere('quantity', 'LIKE',"%{$request->parametro}%")
+            ->orWhere('serial_number', 'LIKE',"%{$request->parametro}%")
             ->paginate(15);
 
-        return view('products.index')->with('products', $products)->with('parametro', $request->parametro);
+        $productsCount = Product::count();
+
+        return view('products.index')->with('products', $products)->with('parametro', $request->parametro)
+            ->with('productsCount', $productsCount);
     }
 }

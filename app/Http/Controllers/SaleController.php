@@ -171,9 +171,22 @@ class SaleController extends Controller
         return redirect()->route('sales.index')->with('success', '¡Venta eliminada exitosamente!');
     }
 
-    public function query()
+    public function query(Request $request)
     {
-        return 'look for sale uh? xd';
+        $empresa = Bussines::first();
+
+        $ventasTotales =  $this->getBalanceService->getTotalSales();
+
+        $gastosTotales =  $this->getBalanceService->getTotalExpenses();
+
+        $utilidadTotal =  $this->getBalanceService->getTotalUtility();
+
+        $sales =  Sale::where('serial_number', 'LIKE',"%{$request->parametro}%")
+            ->paginate(15);
+
+        $productsCount = Product::count();
+
+        return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal', 'empresa'));
     }
 
     public function toPay()
