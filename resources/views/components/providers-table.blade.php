@@ -18,10 +18,13 @@
             <td>{{$provider->documentType?->type . $provider->document }}</td>
             <td>{{$provider->comment}}</td>
             <td>
+                @if(auth()->user()->rol == 1)
+
                 <a href="{{ route('providers.edit', $provider->id) }}" type="button" class="btn btn-primary">Editar</a>
                 <form action="{{ route('providers.destroy', $provider) }}" class="d-inline" method="post">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
+                @endif
             </td>
         </tr>
     @endforeach
