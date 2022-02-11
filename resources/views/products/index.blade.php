@@ -58,8 +58,11 @@
 
         <div class="row">
             <div class="col">
+                @if(auth()->user()->rol == 1)
+
                 <a href="{{ route('products.create') }}" type="button" class="btn btn-success">Agregar nuevo
                     producto</a>
+                @endif
             </div>
         </div>
 

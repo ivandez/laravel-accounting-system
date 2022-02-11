@@ -20,10 +20,14 @@
             <td>{{$product->cost_price}}</td>
             <td>{{$product->quantity}}</td>
             <td>
+                @if(auth()->user()->rol == 1)
+
                 <a href="{{ route('products.edit', $product->id) }}" type="button" class="btn btn-primary">Editar</a>
+
                 <form action="{{ route('products.destroy', $product) }}" class="d-inline" method="post">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
+                @endif
             </td>
         </tr>
     @endforeach
