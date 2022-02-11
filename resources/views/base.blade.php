@@ -8,6 +8,8 @@
 
 {{--    BOOTSTRAP 5     --}}
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
     <title>{{ env('APP_NAME') }}</title>
 </head>
 <body>
@@ -70,3 +72,4 @@
 
 </body>
 </html>
+
