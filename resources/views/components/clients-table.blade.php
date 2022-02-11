@@ -18,10 +18,13 @@
             <td>{{$client->documentType?->type . $client->document }}</td>
             <td>{{$client->comment}}</td>
             <td>
+                @if(auth()->user()->rol == 1)
+
                 <a href="{{ route('clients.edit', $client->id) }}" type="button" class="btn btn-primary">Editar</a>
                 <form action="{{ route('clients.destroy', $client) }}" class="d-inline" method="post">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
+                @endif
             </td>
         </tr>
     @endforeach
