@@ -15,7 +15,7 @@ class StatisticController extends Controller
     public function index()
     {
         $products =  Product::getMoreSellerProducts();
-
+//        return count($products);
         return view('statistic.index')->with('products', $products);
     }
 
