@@ -56,7 +56,7 @@
                                     </td>
                                 @else
                                     <td>
-                                        <a href="a" type="button"
+                                        <a href="{{ route('usuarios.show', $user->id) }}" type="button"
                                            class="btn btn-primary">Ver</a>
                                         <form action="{{route('usuarios.destroy', $user)}}" class="d-inline"
                                               method="post">
