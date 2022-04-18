@@ -115,3 +115,7 @@ Route::get('clientes-mas', [\App\Http\Controllers\TestController::class, 'client
 Route::get('print-demo', function(){
     return view('printdemo');
 });
+
+Route::get('navbar-test', function(){
+    return view('base2');
+});
