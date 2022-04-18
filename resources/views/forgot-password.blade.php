@@ -8,13 +8,18 @@
 
     {{--    BOOTSTRAP 5     --}}
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <style>
+        body{
+            background: #494b74;
+        }
+    </style>
     <title>{{ env('APP_NAME') }}</title>
 </head>
 <body>
 
 <div class="container vh-100">
 
-    <div class="row h-100 justify-content-center align-items-center">
+    <div class="row h-100 justify-content-center align-items-center w-50" style="margin: 0 auto;">
 
         <div class="col p-4 rounded-3" style="background: #fafafa;">
 
@@ -28,23 +33,23 @@
                 </div>
             @endif
 
-            @if (session('status'))
-                <div class="alert alert-success mt-3">
-                    {{ session('status') }}
-                </div>
-            @endif
+                @if (session('status'))
+                                <div class="alert alert-success mt-3">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
 
-            <form action="{{ route('password.email') }}" method="post">
+            <form action="{{ route('password.email') }}" method="post" class="text-center">
 
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email">
-                </div>
+                <legend class="text-uppercase">recuperar contraseña</legend>
 
                 <div class="mb-3">
-                    <a href="{{ route('login') }}">Iniciar sesión</a>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="correo electronico">
                 </div>
-                <button type="submit" class="btn btn-primary">Recuperar contraseña</button>
+                <div class="mb-3">
+                    <a href="{{ route('login') }}" class="text-secondary">Iniciar sesión</a>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
 
         </div>
