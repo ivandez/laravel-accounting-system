@@ -8,13 +8,18 @@
 
     {{--    BOOTSTRAP 5     --}}
     <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <style>
+        body{
+            background: #494b74;
+        }
+    </style>
     <title>{{ env('APP_NAME') }}</title>
 </head>
 <body>
 
 <div class="container vh-100">
 
-    <div class="row h-100 justify-content-center align-items-center">
+    <div class="row h-100 justify-content-center align-items-center w-50" style="margin: 0 auto;">
 
         <div class="col p-4 rounded-3" style="background: #fafafa;">
 
@@ -28,18 +33,18 @@
                 </div>
             @endif
 
-            <form action="{{ route('login') }}" method="post">
+            <form action="{{ route('login') }}" method="post" class="text-center">
+
+                <legend class="text-uppercase">Iniciar sesión</legend>
 
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email">
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="correo electronico">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Contraseña:</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="contraseña">
                 </div>
                 <div class="mb-3">
-                    <a href="{{ route('password.request') }}">Recuperar contraseña</a>
+                    <a href="{{ route('password.request') }}" class="text-secondary">Recuperar contraseña</a>
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
