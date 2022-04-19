@@ -16,7 +16,7 @@ class BussinesController extends Controller
     {
         $empresa = Bussines::first();
 
-        return view('bussines')->with('empresa', $empresa);
+        return view('bussines')->with('empresa', $empresa)->with('section', 'Empresa');
     }
 
     /**

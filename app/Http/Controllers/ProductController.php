@@ -19,7 +19,9 @@ class ProductController extends Controller
 
         $productsCount = Product::count();
 
-        return view('products.index', compact('products', 'productsCount'));
+        $section = 'Productos';
+
+        return view('products.index', compact('products', 'productsCount', 'section'));
     }
 
     /**
@@ -31,7 +33,9 @@ class ProductController extends Controller
     {
         $documentsTypes = DocumentType::all();
 
-        return view('products.create', compact('documentsTypes'));
+        $section = 'Crear productos';
+
+        return view('products.create', compact('documentsTypes', 'section'));
     }
 
     /**
@@ -89,7 +93,9 @@ class ProductController extends Controller
     {
         $documentsTypes = DocumentType::all();
 
-        return view('products.edit', compact(['product', 'documentsTypes']));
+        $section = 'Editar producto';
+
+        return view('products.edit', compact(['product', 'documentsTypes', 'section']));
     }
 
     /**

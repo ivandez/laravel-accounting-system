@@ -117,5 +117,5 @@ Route::get('print-demo', function(){
 });
 
 Route::get('navbar-test', function(){
-    return view('base2');
+    return view('base');
 });

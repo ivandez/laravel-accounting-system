@@ -39,7 +39,9 @@ class SaleController extends Controller
 
         $sales = Sale::where('is_paid', true)->latest()->paginate(15);
 
-        return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal', 'empresa'));
+        $section = "Balance";
+
+        return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal', 'empresa', 'section'));
     }
 
     /**
@@ -49,7 +51,7 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('sales.create');
+        return view('sales.create')->with('section', 'Crear venta');
     }
 
     /**
