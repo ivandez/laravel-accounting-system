@@ -17,7 +17,9 @@ class ProviderController extends Controller
     {
         $providers = Provider::paginate(15);
 
-        return view('providers.index', compact('providers') );
+        $section = 'Proveedores';
+
+        return view('providers.index', compact('providers', 'section'));
     }
 
     /**
@@ -54,7 +56,7 @@ class ProviderController extends Controller
 
         $provider->comment = $request->comentario;
 
-        if($request->documento) {
+        if ($request->documento) {
             $provider->document = $request->documento;
             $provider->documentType()->associate(DocumentType::find($request->tipo_de_documento));
         }
@@ -109,9 +111,9 @@ class ProviderController extends Controller
 
         $provider->comment = $request->comentario;
 
-        if(!$request->documento){
+        if (!$request->documento) {
             $provider->documentType()->dissociate();
-        }else{
+        } else {
             $provider->documentType()->associate(DocumentType::find($request->tipo_de_documento));
         }
 
@@ -137,11 +139,11 @@ class ProviderController extends Controller
 
     public function query(Request $request)
     {
-        $providers =  Provider::where('first_name', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('last_name', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('document', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('phone_number', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('comment', 'LIKE',"%{$request->parametro}%")
+        $providers =  Provider::where('first_name', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('last_name', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('document', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('phone_number', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('comment', 'LIKE', "%{$request->parametro}%")
             ->paginate(15);
 
         return view('providers.index')->with('providers', $providers)->with('parametro', $request->parametro);

@@ -17,7 +17,9 @@ class ClientController extends Controller
     {
         $clients = Client::paginate(15);
 
-        return view('clients.index', compact('clients'));
+        $section = 'Clientes';
+
+        return view('clients.index', compact('clients', 'section'));
     }
 
     /**
@@ -54,7 +56,7 @@ class ClientController extends Controller
 
         $client->comment = $request->comentario;
 
-        if($request->documento) {
+        if ($request->documento) {
             $client->document = $request->documento;
             $client->documentType()->associate(DocumentType::find($request->tipo_de_documento));
         }
@@ -109,9 +111,9 @@ class ClientController extends Controller
 
         $client->comment = $request->comentario;
 
-        if(!$request->documento){
+        if (!$request->documento) {
             $client->documentType()->dissociate();
-        }else{
+        } else {
             $client->documentType()->associate(DocumentType::find($request->tipo_de_documento));
         }
 
@@ -134,7 +136,7 @@ class ClientController extends Controller
         try {
 
             $client->delete();
-        }catch (\Exception $e ){
+        } catch (\Exception $e) {
             return redirect()->route('clients.index')->with('fail', 'No se puede eliminar este cliente porque tiene ventas asociadas');
         }
 
@@ -143,14 +145,13 @@ class ClientController extends Controller
 
     public function query(Request $request)
     {
-        $clients =  Client::where('first_name', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('last_name', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('document', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('phone_number', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('comment', 'LIKE',"%{$request->parametro}%")
+        $clients =  Client::where('first_name', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('last_name', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('document', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('phone_number', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('comment', 'LIKE', "%{$request->parametro}%")
             ->paginate(15);
 
         return view('clients.index')->with('clients', $clients)->with('parametro', $request->parametro);
-
     }
 }

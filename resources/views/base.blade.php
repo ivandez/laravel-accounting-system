@@ -41,9 +41,9 @@
                     src={{ asset('icons/borrow.png') }} width="25px"> deudas por pagar</a>
             <a href={{ route('products.index')}} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/product.png') }} width="25px"> productos</a>
-            <a href="#" class="d-block p-3 nav-link text-white sidebar__anchor"><img
+            <a href={{ route('clients.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/clients.png') }} width="25px"> clientes</a>
-            <a href="#" class="d-block p-3 nav-link text-white sidebar__anchor"><img
+            <a href={{route('providers.index')}} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/providers.png') }} width="25px"> proveedores</a>
             <a href={{route('usuarios.index')}} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/user.png') }} width="25px"> usuarios</a>
