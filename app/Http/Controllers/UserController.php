@@ -17,7 +17,8 @@ class UserController extends Controller
     {
         $users = User::paginate(15);
 
-        return view('users.index')->with('users', $users);
+        $section = 'Usuarios';
+        return view('users.index')->with('users', $users)->with('section', $section);
     }
 
     /**
@@ -41,7 +42,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'password' => 'required|confirmed',
         ]);
-//        return $request;
+        //        return $request;
         $user = new User([
             'name' => $request['nombre'],
             'email' => $request['email'],
