@@ -33,7 +33,8 @@ class StatisticController extends Controller
             ->with('products', $products)
             ->with('clientesMasVentas', $clientesConMasVentas)
             ->with('deudasPorCobrar', $deudasPorCobrar)
-            ->with('deudasPorPagar', $deudasPorPagar);
+            ->with('deudasPorPagar', $deudasPorPagar)
+            ->with('section', 'Estadísticas');
     }
 
     /**

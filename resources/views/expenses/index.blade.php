@@ -6,7 +6,7 @@
 
         <div class="row mt-3">
             <div class="col">
-                <h3>Gastos</h3>
+                <h3>{{$section}}</h3>
             </div>
         </div>
 

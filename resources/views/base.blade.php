@@ -33,7 +33,7 @@
         <div id="menu" class="text-white text-capitalize">
             <a href={{ route('sales.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/dollar.png') }} width="25px"> Balance</a>
-            <a href="#" class="d-block p-3 nav-link text-white sidebar__anchor"><img
+            <a href={{ route('expense.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/expense.png') }} width="25px"> Gastos</a>
             <a href="#" class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/debt.png') }} width="25px"> deudas por cobrar</a>
@@ -49,7 +49,7 @@
                     src={{ asset('icons/user.png') }} width="25px"> usuarios</a>
             <a href={{ route('empresa.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/company.png') }} width="25px"> empresa</a>
-            <a href="#" class="d-block p-3 nav-link text-white sidebar__anchor"><img
+            <a href={{ route('statistic.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/statistics.png') }} width="25px"> estadísticas</a>
         </div>
     </div>

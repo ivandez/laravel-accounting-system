@@ -17,7 +17,9 @@ class ExpenseController extends Controller
     {
         $expenses = Expense::where('is_paid', true)->get();
 
-        return view('expenses.index')->with('expenses', $expenses);
+        $section = "Gastos";
+
+        return view('expenses.index')->with('expenses', $expenses)->with('section', $section);
     }
 
     /**
