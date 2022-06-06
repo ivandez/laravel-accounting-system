@@ -124,8 +124,9 @@ class ExpenseController extends Controller
     public function porPagar()
     {
         $expenses = Expense::where('is_paid', false)->get();
+        $section = "Gastos por pagar";
 
-        return view('expenses.por-pagar')->with('expenses', $expenses);
+        return view('expenses.por-pagar')->with('expenses', $expenses)->with('section', $section);
     }
 
     public function updateStatus(Expense $expense)
