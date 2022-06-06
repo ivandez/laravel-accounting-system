@@ -35,9 +35,9 @@
                     src={{ asset('icons/dollar.png') }} width="25px"> Balance</a>
             <a href={{ route('expense.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/expense.png') }} width="25px"> Gastos</a>
-            <a href="#" class="d-block p-3 nav-link text-white sidebar__anchor"><img
+            <a href={{ route('sales.toPay')}} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/debt.png') }} width="25px"> deudas por cobrar</a>
-            <a href="#" class="d-block p-3 nav-link text-white sidebar__anchor"><img
+            <a href={{ route('expense.porPagar')}} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/borrow.png') }} width="25px"> deudas por pagar</a>
             <a href={{ route('products.index')}} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/product.png') }} width="25px"> productos</a>

@@ -71,11 +71,11 @@ class SaleController extends Controller
         ]);
 
         // Check if products has stock
-        foreach ($request->productos as $product){
+        foreach ($request->productos as $product) {
 
             $hasStock = Product::hasStock($product['id'], $product['quantity']);
 
-            if(!$hasStock){
+            if (!$hasStock) {
                 return response()->json('no stock', 422);
             }
         }
@@ -96,19 +96,21 @@ class SaleController extends Controller
 
         $sale->save();
 
-        foreach ($request->productos as $product){
+        foreach ($request->productos as $product) {
             $p = Product::find($product['id']);
 
             $p->quantity -= $product['quantity'];
 
             $p->save();
 
-            $sale->products()->attach($product['id'],
+            $sale->products()->attach(
+                $product['id'],
                 [
                     'quantity' => $product['quantity'],
                     'product_price' => $product['product_price'],
                     'product_cost' => $p->cost_price,
-                ]);
+                ]
+            );
         }
 
         return 'exitooo';
@@ -158,7 +160,7 @@ class SaleController extends Controller
     public function destroy(Sale $sale)
     {
 
-        foreach ($sale->products as $product){
+        foreach ($sale->products as $product) {
             $p = Product::find($product['id']);
 
             $p->quantity += $product->pivot->quantity;
@@ -183,7 +185,7 @@ class SaleController extends Controller
 
         $utilidadTotal =  $this->getBalanceService->getTotalUtility();
 
-        $sales =  Sale::where('serial_number', 'LIKE',"%{$request->parametro}%")
+        $sales =  Sale::where('serial_number', 'LIKE', "%{$request->parametro}%")
             ->paginate(15);
 
         $productsCount = Product::count();
@@ -194,8 +196,9 @@ class SaleController extends Controller
     public function toPay()
     {
         $sales = Sale::where('is_paid', false)->get();
+        $section = "Ventas por cobrar";
 
-        return view('sales.to-pay')->with('sales', $sales);
+        return view('sales.to-pay')->with('sales', $sales)->with('section', $section);
     }
 
     public function updateStatus(Sale $sale)
