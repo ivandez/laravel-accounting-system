@@ -26,7 +26,7 @@
 <body>
 
 <div class="d-flex">
-    <div id="sidebar-container" class="p-2 vh-100">
+    <div id="sidebar-container" class="p-2" style="height: 800px">
         <div>
             <h4 class="text-light fw-bold">{{ env('APP_NAME') }}</h4>
         </div>
@@ -53,7 +53,7 @@
                     src={{ asset('icons/statistics.png') }} width="25px"> estadísticas</a>
         </div>
     </div>
-    <div class="w-100">
+    <div class="w-100 vh-100">
         {{--       THIS IS THE  Navbar--}}
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
