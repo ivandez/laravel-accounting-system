@@ -51,6 +51,7 @@ class SaleController extends Controller
      */
     public function create()
     {
+
         return view('sales.create')->with('section', 'Crear venta');
     }
 
@@ -125,7 +126,9 @@ class SaleController extends Controller
     public function show(Sale $sale)
     {
 
-        return view('sales.show')->with('sale', $sale);
+        $section = "Balance";
+
+        return view('sales.show')->with('sale', $sale)->with('section', $section);
     }
 
     /**

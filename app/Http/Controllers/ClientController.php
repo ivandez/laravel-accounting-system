@@ -31,7 +31,7 @@ class ClientController extends Controller
     {
         $documentsTypes = DocumentType::all();
 
-        return view('clients.create', compact('documentsTypes'));
+        return view('clients.create', compact('documentsTypes'))->with('section', 'Agregar usuario');
     }
 
     /**
@@ -87,7 +87,7 @@ class ClientController extends Controller
     {
         $documentsTypes = DocumentType::all();
 
-        return view('clients.edit', compact(['client', 'documentsTypes']));
+        return view('clients.edit', compact(['client', 'documentsTypes']))->with('section', 'Editar proveedor');
     }
 
     /**

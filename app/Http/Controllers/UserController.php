@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('users.create')->with('section', 'Usuario proveedor');
     }
 
     /**
@@ -63,7 +63,7 @@ class UserController extends Controller
      */
     public function show(User $usuario)
     {
-        return view('users.show')->with('usuario', $usuario);
+        return view('users.show')->with('usuario', $usuario)->with('section', 'Ver usuario');
     }
 
     /**

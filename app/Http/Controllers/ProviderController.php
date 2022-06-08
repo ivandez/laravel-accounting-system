@@ -31,7 +31,7 @@ class ProviderController extends Controller
     {
         $documentsTypes = DocumentType::all();
 
-        return view('providers.create', compact('documentsTypes'));
+        return view('providers.create', compact('documentsTypes'))->with('section', 'Agregar proveedor');
     }
 
     /**
@@ -87,7 +87,7 @@ class ProviderController extends Controller
     {
         $documentsTypes = DocumentType::all();
 
-        return view('providers.edit', compact(['provider', 'documentsTypes']));
+        return view('providers.edit', compact(['provider', 'documentsTypes']))->with('section', 'Editar proveedor');
     }
 
     /**

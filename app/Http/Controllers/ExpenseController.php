@@ -29,7 +29,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        return view('expenses.create');
+        return view('expenses.create')->with('section', 'Crear gasto');
     }
 
     /**
