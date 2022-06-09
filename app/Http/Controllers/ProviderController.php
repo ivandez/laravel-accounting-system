@@ -146,6 +146,7 @@ class ProviderController extends Controller
             ->orWhere('comment', 'LIKE', "%{$request->parametro}%")
             ->paginate(15);
 
-        return view('providers.index')->with('providers', $providers)->with('parametro', $request->parametro);
+        return view('providers.index')->with('providers', $providers)->with('parametro', $request->parametro)
+            ->with('section', 'Buscador');
     }
 }

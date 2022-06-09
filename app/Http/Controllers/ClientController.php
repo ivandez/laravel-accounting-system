@@ -152,6 +152,7 @@ class ClientController extends Controller
             ->orWhere('comment', 'LIKE', "%{$request->parametro}%")
             ->paginate(15);
 
-        return view('clients.index')->with('clients', $clients)->with('parametro', $request->parametro);
+        return view('clients.index')->with('clients', $clients)->with('parametro', $request->parametro)
+            ->with('section', 'Buscador');
     }
 }

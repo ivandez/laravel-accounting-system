@@ -149,17 +149,17 @@ class ProductController extends Controller
 
     public function query(Request $request)
     {
-        $products =  Product::where('name', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('unit_price', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('cost_price', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('description', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('quantity', 'LIKE',"%{$request->parametro}%")
-            ->orWhere('serial_number', 'LIKE',"%{$request->parametro}%")
+        $products =  Product::where('name', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('unit_price', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('cost_price', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('description', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('quantity', 'LIKE', "%{$request->parametro}%")
+            ->orWhere('serial_number', 'LIKE', "%{$request->parametro}%")
             ->paginate(15);
 
         $productsCount = Product::count();
 
         return view('products.index')->with('products', $products)->with('parametro', $request->parametro)
-            ->with('productsCount', $productsCount);
+            ->with('productsCount', $productsCount)->with('section', 'Buscador');
     }
 }
