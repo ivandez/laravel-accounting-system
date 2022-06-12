@@ -51,6 +51,8 @@
                     src={{ asset('icons/company.png') }} width="25px"> empresa</a>
             <a href={{ route('statistic.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/statistics.png') }} width="25px"> estadísticas</a>
+            <a href={{ route('soporte') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
+                    src={{ asset('icons/supports.png') }} width="25px"> soporte</a>
         </div>
     </div>
     <div class="w-100 vh-100">

@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use \App\Http\Controllers\BussinesController;
 use \App\Http\Controllers\StatisticController;
 use \App\Http\Controllers\ReportController;
+use \App\Http\Controllers\HelpController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,11 +22,11 @@ use \App\Http\Controllers\ReportController;
 |
 */
 
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', fn() => redirect()->route('sales.index') );
+    Route::get('/', fn () => redirect()->route('sales.index'));
 
-    Route::get('home', fn() => redirect()->route('sales.index') );
+    Route::get('home', fn () => redirect()->route('sales.index'));
 
     // SALES
     Route::prefix('ventas')->group(function () {
@@ -41,7 +42,7 @@ Route::middleware(['auth'])->group(function (){
         Route::put('/update-status/{sale}', [SaleController::class, 'updateStatus'])->name('sales.updateStatus');
     });
 
-// EXPENSES
+    // EXPENSES
     Route::prefix('gastos')->group(function () {
         Route::get('/', [ExpenseController::class, 'index'])->name('expense.index');
         Route::post('/store', [ExpenseController::class, 'store'])->name('expense.store');
@@ -54,7 +55,7 @@ Route::middleware(['auth'])->group(function (){
         Route::put('/update-status/{expense}', [ExpenseController::class, 'updateStatus'])->name('expense.updateStatus');
     });
 
-// CLIENTS
+    // CLIENTS
     Route::prefix('clientes')->group(function () {
         Route::get('/', [ClientController::class, 'index'])->name('clients.index');
         Route::get('/agregar', [ClientController::class, 'create'])->name('clients.create');
@@ -65,7 +66,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/buscar', [ClientController::class, 'query'])->name('clients.query');
     });
 
-// PROVIDERS
+    // PROVIDERS
     Route::prefix('proveedores')->group(function () {
         Route::get('/', [ProviderController::class, 'index'])->name('providers.index');
         Route::get('/agregar', [ProviderController::class, 'create'])->name('providers.create');
@@ -76,7 +77,7 @@ Route::middleware(['auth'])->group(function (){
         Route::get('/buscar', [ProviderController::class, 'query'])->name('providers.query');
     });
 
-// PRODUCTS
+    // PRODUCTS
     Route::prefix('productos')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('products.index');
         Route::get('/agregar', [ProductController::class, 'create'])->name('products.create');
@@ -100,6 +101,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/reporte', [ReportController::class, 'index'])->name('report.index');
     Route::post('/reporte', [ReportController::class, 'getReport'])->name('report.getReport');
 
+    Route::get('/soporte', HelpController::class)->name('soporte');
 });
 
 
@@ -112,10 +114,10 @@ Route::get('invoice', [\App\Http\Controllers\TestController::class, 'invoice']);
 Route::get('deudas-por-pagar', [\App\Http\Controllers\TestController::class, 'deudasPortPagar']);
 Route::get('deudas-por-cobrar', [\App\Http\Controllers\TestController::class, 'getDeudasPorCobrar']);
 Route::get('clientes-mas', [\App\Http\Controllers\TestController::class, 'clienteMas']);
-Route::get('print-demo', function(){
+Route::get('print-demo', function () {
     return view('printdemo');
 });
 
-Route::get('navbar-test', function(){
+Route::get('navbar-test', function () {
     return view('base');
 });
