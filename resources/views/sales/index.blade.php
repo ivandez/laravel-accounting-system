@@ -46,7 +46,13 @@
                 @endif
                 <a href="/reporte" type="button" class="btn btn-success">Obtener reporte</a>
             </div>
-        @endif
+            @endif
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="printJS('printTable', 'html')">
+                        Impresión rapida
+                    </button>
+            </div>
 
         <div class="row mt-3">
             <div class="col">
@@ -62,4 +68,8 @@
 
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/print.min.js') }}"></script>
 @endsection

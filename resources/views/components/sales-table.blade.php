@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" id="printTable">
     <thead>
     <tr>
         <th scope="col">Cliente o proveedor</th>
