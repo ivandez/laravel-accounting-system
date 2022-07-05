@@ -47,12 +47,15 @@
                 <a href="/reporte" type="button" class="btn btn-success">Obtener reporte</a>
             </div>
             @endif
+
+        @if (count($sales) > 0)
             <div class="row mt-3">
                 <div class="col">
-                    <button type="button" class="btn btn-primary" onclick="printJS('printTable', 'html')">
+                    <button type="button" class="btn btn-primary" onclick="printJS({printable: 'printTable', type: 'html', ignoreElements: ['opciones']})">
                         Impresión rapida
                     </button>
             </div>
+        @endif
 
         <div class="row mt-3">
             <div class="col">

@@ -19,7 +19,7 @@
             <th>{{$sale->comment}}</th>
             <th>{{$sale->paymentMethod->name}}</th>
             <th>{{ formatDatePls($sale->date) }}</th>
-            <td>
+            <td id="opciones">
                 <a href="{{ route('sales.show', $sale->id) }}" type="button" class="btn btn-primary">Ver</a>
                 <a href="{{ route('sales.getInvoice', $sale) }}" target="_blank" type="button" class="btn btn-success">Recibo</a>
                 @if(auth()->user()->rol == 1)
