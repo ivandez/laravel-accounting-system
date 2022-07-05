@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" id="expense-table">
     <thead>
     <tr>
         <th scope="col">Proveedor</th>
@@ -17,7 +17,7 @@
             <th>{{$expense->comment}}</th>
             <th>{{$expense->paymentMethod->name}}</th>
             <th>{{ formatDatePls($expense->date) }}</th>
-            <td>
+            <td id="opciones">
                 <a href="{{ route('sales.show', $expense->id) }}" type="button" class="btn btn-primary">Ver</a>
                 @if(auth()->user()->rol == 1)
                     <form action="{{ route('sales.destroy', $expense) }}" class="d-inline" method="post">

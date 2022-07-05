@@ -32,6 +32,15 @@
             </div>
         </div>
 
+        @if (count($expenses) > 0)
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="printJS({printable: 'expense-table', type: 'html', ignoreElements: ['opciones']})">
+                        Impresión rapida
+                    </button>
+            </div>
+        @endif
+
         <div class="row mt-3">
             <div class="col">
                 <x-expense-table :expenses="$expenses"/>
@@ -40,4 +49,7 @@
 
     </div>
 
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/print.min.js') }}"></script>
 @endsection
