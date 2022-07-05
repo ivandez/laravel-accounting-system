@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" id="products-table">
     <thead>
     <tr>
         <th scope="col">Nombre</th>
@@ -19,7 +19,7 @@
             <td>{{$product->unit_price}}</td>
             <td>{{$product->cost_price}}</td>
             <td>{{$product->quantity}}</td>
-            <td>
+            <td id="opciones">
                 @if(auth()->user()->rol == 1)
 
                 <a href="{{ route('products.edit', $product->id) }}" type="button" class="btn btn-primary">Editar</a>
