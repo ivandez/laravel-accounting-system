@@ -193,7 +193,9 @@ class SaleController extends Controller
 
         $productsCount = Product::count();
 
-        return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal', 'empresa'));
+        $section = 'Balance';
+
+        return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal', 'empresa', 'section'));
     }
 
     public function toPay()
