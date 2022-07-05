@@ -20,7 +20,7 @@
 
         <div class="row mt-3">
             <div class="col">
-                <x-search-bar url="{{ route('sales.query') }}"/>
+                <x-search-bar url="{{ route('sales.queryToPay') }}"/>
             </div>
         </div>
 

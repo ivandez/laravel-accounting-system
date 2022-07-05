@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/buscar', [SaleController::class, 'query'])->name('sales.query');
         Route::get('/crear', [SaleController::class, 'create'])->name('sales.create');
         Route::get('/por-cobrar', [SaleController::class, 'toPay'])->name('sales.toPay');
+        Route::get('/buscar-por-pagar', [SaleController::class, 'queryToPay'])->name('sales.queryToPay');
         Route::get('/invoce/{sale}', [SaleController::class, 'getInvoice'])->name('sales.getInvoice');
         Route::put('/update-status/{sale}', [SaleController::class, 'updateStatus'])->name('sales.updateStatus');
     });

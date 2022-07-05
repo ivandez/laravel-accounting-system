@@ -207,6 +207,27 @@ class SaleController extends Controller
         return view('sales.to-pay')->with('sales', $sales)->with('section', $section);
     }
 
+    public function queryToPay(Request $request)
+    {
+        $empresa = Bussines::first();
+
+        $ventasTotales =  $this->getBalanceService->getTotalSales();
+
+        $gastosTotales =  $this->getBalanceService->getTotalExpenses();
+
+        $utilidadTotal =  $this->getBalanceService->getTotalUtility();
+
+        $sales =  Sale::where('comment', 'LIKE', "%{$request->parametro}%")
+            ->where('is_paid', false)
+            ->paginate(15);
+
+        $productsCount = Product::count();
+
+        $section = 'Balance';
+
+        return view('sales.to-pay', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal', 'empresa', 'section'));
+    }
+
     public function updateStatus(Sale $sale)
     {
         $sale->is_paid = true;
