@@ -52,7 +52,16 @@
             </div>
         </div>
 
-        <div class="row">
+        @if (count($clients) > 0)
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="printJS({printable: 'clients-table', type: 'html', ignoreElements: ['opciones']})">
+                        Impresión rapida
+                    </button>
+            </div>
+        @endif
+
+        <div class="row mt-3">
             <div class="col">
                 <x-clients-table :clients="$clients"/>
             </div>
@@ -65,4 +74,8 @@
         </div>
 
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/print.min.js') }}"></script>
 @endsection
