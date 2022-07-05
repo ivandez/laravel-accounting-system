@@ -116,9 +116,15 @@ class ExpenseController extends Controller
         return redirect()->route('expense.index')->with('success', '¡Gasto eliminado exitosamente!');
     }
 
-    public function query()
+    public function query(Request $request)
     {
-        return 'look for sale uh? xd';
+
+        $expenses =  Expense::where('comment', 'LIKE', "%{$request->parametro}%")
+            ->paginate(15);
+
+        $section = 'Gastos';
+
+        return view('expenses.index', compact('expenses', 'section'));
     }
 
     public function porPagar()
