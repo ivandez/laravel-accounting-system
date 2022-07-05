@@ -33,6 +33,15 @@
             </div>
         </div>
 
+        @if (count($sales) > 0)
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="button" class="btn btn-primary" onclick="printJS({printable: 'to-pay-sales', type: 'html', ignoreElements: ['opciones']})">
+                        Impresión rapida
+                    </button>
+            </div>
+        @endif
+
         <div class="row mt-3">
             <div class="col">
                 <x-to-pay-sales :sales="$sales"/>
@@ -41,4 +50,7 @@
 
     </div>
 
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/print.min.js') }}"></script>
 @endsection

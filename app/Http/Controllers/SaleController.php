@@ -201,6 +201,7 @@ class SaleController extends Controller
     public function toPay()
     {
         $sales = Sale::where('is_paid', false)->get();
+
         $section = "Ventas por cobrar";
 
         return view('sales.to-pay')->with('sales', $sales)->with('section', $section);

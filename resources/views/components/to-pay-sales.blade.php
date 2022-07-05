@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" id="to-pay-sales">
     <thead>
     <tr>
         <th scope="col">Cliente o proveedor</th>
@@ -17,7 +17,7 @@
             <th>{{$sale->comment}}</th>
             <th>{{$sale->paymentMethod->name}}</th>
             <th>{{ formatDatePls($sale->date) }}</th>
-            <td>
+            <td id="opciones">
                 @if(auth()->user()->rol == 1)
 
                 <form action="{{ route('sales.updateStatus', $sale->id) }}" method="post" class="d-inline">
