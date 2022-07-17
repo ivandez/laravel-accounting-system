@@ -103,6 +103,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reporte-sales', [ReportController::class, 'getReportSalesView'])->name('report.getReportSalesView');
     Route::post('/reporte-sales', [ReportController::class, 'getReportSales'])->name('report.getReportSales');
 
+    Route::get('/reporte-deudas-por-cobrar', [ReportController::class, 'getReportSalesPorCobrarView'])->name('report.getReportSalesPorCobrarView');
+    Route::post('/reporte-deudas-por-cobrar', [ReportController::class, 'getReportSalesPorCobrar'])->name('report.getReportSalesPorCobrar');
+
     Route::get('/reporte-expense', [ReportController::class, 'getReportExpenseView'])->name('report.getReportExpenseView');
     Route::post('/reporte-expense', [ReportController::class, 'getReportExpense'])->name('report.getReportExpense');
 
