@@ -20,7 +20,7 @@
             <td id="opciones">
                 {{-- <a href="{{ route('expense.show', $expense->id) }}" type="button" class="btn btn-primary">Ver</a> --}}
                 @if(auth()->user()->rol == 1)
-                    <form action="{{ route('sales.destroy', $expense) }}" class="d-inline" method="post">
+                    <form action="{{ route('expense.destroy', $expense) }}" class="d-inline" method="post">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 @endif
