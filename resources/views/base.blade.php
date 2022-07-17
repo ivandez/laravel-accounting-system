@@ -53,6 +53,9 @@
             @endif
             <a href={{ route('statistic.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/statistics.png') }} width="25px"> estadísticas</a>
+            <a href={{ route('report.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
+            src={{ asset('icons/report.png') }} width="25px"> Reportes</a>
+
             <a href={{ route('soporte') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/supports.png') }} width="25px"> soporte</a>
         </div>

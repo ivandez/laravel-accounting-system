@@ -44,7 +44,7 @@
                 @if(auth()->user()->rol == 1)
                     <a href="{{ route('sales.create') }}" type="button" class="btn btn-success">Agregar nueva venta</a>
                 @endif
-                <a href="/reporte" type="button" class="btn btn-success">Obtener reporte</a>
+                {{-- <a href="/reporte" type="button" class="btn btn-success">Obtener reporte</a> --}}
             </div>
             @endif
 

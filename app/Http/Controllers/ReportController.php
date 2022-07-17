@@ -10,10 +10,10 @@ class ReportController extends Controller
 {
     public function index()
     {
-        return view('report')->with('section', 'Reporte');
+        return view('report/report')->with('section', 'Reporte');
     }
 
-    public function getReport(Request $request)
+    public function getReportSales(Request $request)
     {
 
         $asd = DB::table('sales')
