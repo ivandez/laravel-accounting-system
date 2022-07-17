@@ -109,6 +109,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reporte-expense', [ReportController::class, 'getReportExpenseView'])->name('report.getReportExpenseView');
     Route::post('/reporte-expense', [ReportController::class, 'getReportExpense'])->name('report.getReportExpense');
 
+    Route::get('/reporte-deudas-por-pagar', [ReportController::class, 'getReportExpensePorPagarView'])->name('report.getReportExpensePorPagarView');
+    Route::post('/reporte-deudas-por-pagar', [ReportController::class, 'getReportExpensePorPagar'])->name('report.getReportExpensePorCobrar');
+
     Route::get('/soporte', HelpController::class)->name('soporte');
 });
 

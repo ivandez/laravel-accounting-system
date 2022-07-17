@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Expense;
+w
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Rap2hpoutre\FastExcel\FastExcel;
@@ -17,6 +16,30 @@ class ReportController extends Controller
     public function getReportSalesView()
     {
         return view('report/reportSales')->with('section', 'Reporte de ventas');
+    }
+
+    public function getReportExpensePorPagarView()
+    {
+        return view('report/reportGastoPorPagar')->with('section', 'Reporte de gastos por cobrar');
+    }
+
+    public function getReportExpensePorPagar(Request $request)
+    {
+        $asd = DB::table('expenses')
+            ->join('payment_methods', 'expenses.payment_method_id', '=', 'payment_methods.id')
+            ->leftJoin('providers', 'providers.id', '=', 'expenses.provider_id')
+            ->select(
+                'expenses.comment as comentario',
+                'expenses.date as fecha',
+                'expenses.amount AS monto',
+                'providers.first_name AS nombre proveedor',
+                'providers.last_name AS apellido proveedor',
+                'payment_methods.name AS metodo_pago',
+            )->where('expenses.is_paid', false)
+            ->whereBetween('expenses.date', [$request->date, $request->date2])
+            ->get();
+
+        return (new FastExcel($asd))->download('reporte.xlsx');
     }
 
     public function getReportSalesPorCobrarView()

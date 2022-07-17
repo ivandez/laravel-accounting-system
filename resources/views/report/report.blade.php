@@ -32,6 +32,15 @@
                   </div>
             </div>
 
+            <div class="col mt-3">
+                <div class="card" style="width: 18rem;align-items: center;">
+                    <img src="{{ asset('icons/borrow.png')}}" class="card-img-top w-50 mt-2" alt="...">
+                    <div class="card-body">
+                        <a href="{{route('report.getReportExpensePorPagarView')}}" type="button" class="btn btn-success">Reporte de deudas por pagar</a>
+                    </div>
+                  </div>
+            </div>
+
         </div>
     </div>
 
