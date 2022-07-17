@@ -9,6 +9,11 @@ class Expense extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function provider()
     {
         return $this->belongsTo(Provider::class);
