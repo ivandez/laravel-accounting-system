@@ -74,10 +74,11 @@ class ExpenseController extends Controller
      * @param  \App\Models\Sale  $sale
      * @return \Illuminate\Http\Response
      */
-    public function show(Sale $sale)
+    public function show(Expense $expense)
     {
+        $section = "Ver gasto";
 
-        return view('sales.show')->with('sale', $sale);
+        return view('expenses.show')->with('section', $section)->with('expense', $expense);
     }
 
     /**

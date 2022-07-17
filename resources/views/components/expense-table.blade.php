@@ -18,7 +18,7 @@
             <th>{{$expense->paymentMethod->name}}</th>
             <th>{{ formatDatePls($expense->date) }}</th>
             <td id="opciones">
-                <a href="{{ route('sales.show', $expense->id) }}" type="button" class="btn btn-primary">Ver</a>
+                {{-- <a href="{{ route('expense.show', $expense->id) }}" type="button" class="btn btn-primary">Ver</a> --}}
                 @if(auth()->user()->rol == 1)
                     <form action="{{ route('sales.destroy', $expense) }}" class="d-inline" method="post">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
