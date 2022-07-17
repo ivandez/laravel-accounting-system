@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" id="providers-table">
     <thead>
     <tr>
         <th scope="col">Nombre</th>
@@ -17,7 +17,7 @@
             <td>{{$provider->phone_number}}</td>
             <td>{{$provider->documentType?->type . $provider->document }}</td>
             <td>{{$provider->comment}}</td>
-            <td>
+            <td id="opciones">
                 @if(auth()->user()->rol == 1)
 
                 <a href="{{ route('providers.edit', $provider->id) }}" type="button" class="btn btn-primary">Editar</a>
