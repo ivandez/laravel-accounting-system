@@ -13,6 +13,11 @@ class ReportController extends Controller
         return view('report/report')->with('section', 'Reporte');
     }
 
+    public function getReportSalesView()
+    {
+        return view('report/reportSales')->with('section', 'Reporte de ventas');
+    }
+
     public function getReportSales(Request $request)
     {
 
