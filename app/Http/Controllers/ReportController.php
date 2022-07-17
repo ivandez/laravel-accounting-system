@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-w
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Rap2hpoutre\FastExcel\FastExcel;
