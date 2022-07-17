@@ -47,8 +47,10 @@
                     src={{ asset('icons/providers.png') }} width="25px"> proveedores</a>
             <a href={{route('usuarios.index')}} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/user.png') }} width="25px"> usuarios</a>
-            <a href={{ route('empresa.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
-                    src={{ asset('icons/company.png') }} width="25px"> empresa</a>
+            @if(auth()->user()->rol == 1)
+                <a href={{ route('empresa.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
+                src={{ asset('icons/company.png') }} width="25px"> empresa</a>
+            @endif
             <a href={{ route('statistic.index') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
                     src={{ asset('icons/statistics.png') }} width="25px"> estadísticas</a>
             <a href={{ route('soporte') }} class="d-block p-3 nav-link text-white sidebar__anchor"><img
