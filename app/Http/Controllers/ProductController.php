@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DocumentType;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -66,6 +67,8 @@ class ProductController extends Controller
         $product->quantity = $request->cantidad;
 
         $product->serial_number = Product::getSerialNumber();
+
+        $product->create_by =  Auth::user()->name;
 
         $product->save();
 

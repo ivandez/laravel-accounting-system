@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('cost_price');
             $table->string('description')->nullable();
             $table->integer('quantity');
+            $table->string('create_by');
             $table->timestamps();
         });
     }
