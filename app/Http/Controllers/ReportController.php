@@ -20,7 +20,7 @@ class ReportController extends Controller
 
     public function getReportExpensePorPagarView()
     {
-        return view('report/reportGastoPorPagar')->with('section', 'Reporte de gastos por cobrar');
+        return view('report/reportGastoPorPagar')->with('section', 'Reporte de deudas por pagar');
     }
 
     public function getReportExpensePorPagar(Request $request)
@@ -34,7 +34,7 @@ class ReportController extends Controller
                 'expenses.amount AS monto',
                 'providers.first_name AS nombre proveedor',
                 'providers.last_name AS apellido proveedor',
-                'payment_methods.name AS metodo_pago',
+                'payment_methods.name AS metodo pago',
             )->where('expenses.is_paid', false)
             ->whereBetween('expenses.date', [$request->date, $request->date2])
             ->get();

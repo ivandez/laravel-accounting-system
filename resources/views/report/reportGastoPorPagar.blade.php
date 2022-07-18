@@ -23,7 +23,7 @@
         <div class="row mt-3">
 
             <div class="col">
-                <form action="{{ route('getProductos')}}" method="post">
+                <form action="{{route('report.getReportExpensePorCobrar') }}" method="post">
                     @csrf @method('POST')
 
                     <div class="form-group mb-3">
