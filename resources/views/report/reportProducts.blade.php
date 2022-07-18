@@ -29,10 +29,8 @@
         <div class="row mt-3">
 
             <div class="col">
-                {{-- {{route('report.getReportSales')}} --}}
-                <form action="" method="post">
+                <form action="{{ route('report.getProductos') }}" method="post">
                     @csrf @method('POST')
-
                     <div class="custom-control custom-radio">
                         <input required type="radio" id="customRadio1" value="1" name="customRadio" class="custom-control-input">
                         <label class="custom-control-label" for="customRadio1">Agregados de más nuevo a más viejo</label>
