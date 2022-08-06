@@ -133,7 +133,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reporte-deudas-por-pagar', [ReportController::class, 'getReportExpensePorPagarView'])->name('report.getReportExpensePorPagarView');
     Route::post('/reporte-deudas-por-pagar', [ReportController::class, 'getReportExpensePorPagar'])->name('report.getReportExpensePorCobrar');
 
-    Route::get('/reporte-productos', [ReportController::class, 'getProductosView'])->name('report.getProductosView');
+    Route::get('/reporte-productos', [ReportController::class, 'getProductosViewVue'])->name('report.getProductosView');
     Route::post('/reporte-productos', [ReportController::class, 'getProductos'])->name('report.getProductos');
 
     Route::get('/soporte', HelpController::class)->name('soporte');

@@ -3892,7 +3892,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context4.prev = 1;
                 _context4.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post("reporte-productos", {
-                  orden: "desc"
+                  orden: "desc",
+                  tags: [2]
                 }, {
                   responseType: "arraybuffer"
                 });

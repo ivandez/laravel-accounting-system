@@ -163,6 +163,7 @@ class ReportController extends Controller
                 'products.create_by AS creado por',
                 'products.created_at AS fecha de creación',
             )
+            ->whereIn('tag_id', $request->tags)
             ->orderBy('created_at', $request->orden)
             ->get();
 

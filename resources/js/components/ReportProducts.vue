@@ -299,7 +299,10 @@ export default {
             try {
                 const res = await axios.post(
                     "reporte-productos",
-                    { orden: "desc" },
+                    {
+                        orden: "desc",
+                        tags: [2],
+                    },
                     {
                         responseType: "arraybuffer",
                     }
