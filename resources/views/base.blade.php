@@ -26,7 +26,7 @@
 <body>
 
 <div class="d-flex">
-    <div id="sidebar-container" class="p-2" style="height: 1300px">
+    <div id="sidebar-container" class="p-2" style="height: 2000px">
         <div>
             <h4 class="text-light fw-bold">{{ env('APP_NAME') }}</h4>
         </div>
