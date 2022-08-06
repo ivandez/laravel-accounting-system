@@ -3883,7 +3883,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var res, url, a, filename;
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -3894,26 +3894,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post("reporte-productos", {
                   orden: "desc",
                   tags: [2]
-                }, {
-                  responseType: "arraybuffer"
-                });
+                } // {
+                //     responseType: "arraybuffer",
+                // }
+                );
 
               case 4:
                 res = _context4.sent;
-                console.log("🚀 ~ file: AddProducts.vue ~ line 301 ~ submitData ~ res", res);
-                url = window.URL.createObjectURL(new Blob([res.data]));
-                a = document.createElement("a");
-                a.href = url;
-                filename = "file.xlsx";
-                a.setAttribute("download", filename);
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                _context4.next = 19;
+                console.log("🚀 ~ file: AddProducts.vue ~ line 301 ~ submitData ~ res", res); // const url = window.URL.createObjectURL(new Blob([res.data]));
+                // const a = document.createElement("a");
+                // a.href = url;
+                // const filename = `file.xlsx`;
+                // a.setAttribute("download", filename);
+                // document.body.appendChild(a);
+                // a.click();
+                // a.remove();
+
+                _context4.next = 11;
                 break;
 
-              case 16:
-                _context4.prev = 16;
+              case 8:
+                _context4.prev = 8;
                 _context4.t0 = _context4["catch"](1);
 
                 if (_context4.t0.response.data === "no stock") {
@@ -3926,12 +3927,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this5.showErrorAlert = true;
                 }
 
-              case 19:
+              case 11:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[1, 16]]);
+        }, _callee4, null, [[1, 8]]);
       }))();
     },
     getActualDate: function getActualDate() {

@@ -302,24 +302,24 @@ export default {
                     {
                         orden: "desc",
                         tags: [2],
-                    },
-                    {
-                        responseType: "arraybuffer",
                     }
+                    // {
+                    //     responseType: "arraybuffer",
+                    // }
                 );
                 console.log(
                     "🚀 ~ file: AddProducts.vue ~ line 301 ~ submitData ~ res",
                     res
                 );
 
-                const url = window.URL.createObjectURL(new Blob([res.data]));
-                const a = document.createElement("a");
-                a.href = url;
-                const filename = `file.xlsx`;
-                a.setAttribute("download", filename);
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
+                // const url = window.URL.createObjectURL(new Blob([res.data]));
+                // const a = document.createElement("a");
+                // a.href = url;
+                // const filename = `file.xlsx`;
+                // a.setAttribute("download", filename);
+                // document.body.appendChild(a);
+                // a.click();
+                // a.remove();
             } catch (e) {
                 if (e.response.data === "no stock") {
                     // fking shit not work

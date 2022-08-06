@@ -125,35 +125,7 @@ class ReportController extends Controller
 
     public function getProductos(Request $request)
     {
-        // if ($request->customRadio) {
-        //     $asd = DB::table('products')
-        //         ->select(
-        //             'products.name as nombre',
-        //             'products.serial_number as serial',
-        //             'products.cost_price AS costo',
-        //             'products.description AS descripcion',
-        //             'products.quantity AS cantidad',
-        //             'products.create_by AS creado por',
-        //             'products.created_at AS fecha de creación',
-        //         )
-        //         ->orderBy('created_at', 'asc')
-        //         ->get();
-        // } else {
-        //     $asd = DB::table('products')
-        //         ->select(
-        //             'products.name as nombre',
-        //             'products.serial_number as serial',
-        //             'products.cost_price AS costo',
-        //             'products.description AS descripcion',
-        //             'products.quantity AS cantidad',
-        //             'products.create_by AS creado por',
-        //             'products.created_at AS fecha de creación',
-        //         )
-        //         ->orderBy('created_at', 'desc')
-        //         ->get();
-        // }
-
-        $asd = DB::table('products')
+        return $asd = DB::table('products')
             ->select(
                 'products.name as nombre',
                 'products.serial_number as serial',
@@ -163,7 +135,9 @@ class ReportController extends Controller
                 'products.create_by AS creado por',
                 'products.created_at AS fecha de creación',
             )
-            ->whereIn('tag_id', $request->tags)
+            ->when($request->tags, function ($query) use ($request) {
+                return $query->whereIn('tag_id', $request->tags);
+            })
             ->orderBy('created_at', $request->orden)
             ->get();
 
