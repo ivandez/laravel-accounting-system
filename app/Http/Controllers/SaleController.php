@@ -49,7 +49,9 @@ class SaleController extends Controller
     {
         $section = "Preparar venta";
 
-        return view('sales.prepare-sale', compact('section'));
+        $clients = Client::all()->count();
+
+        return view('sales.prepare-sale', compact('section', 'clients'));
     }
 
     /**
@@ -59,12 +61,12 @@ class SaleController extends Controller
      */
     public function create()
     {
-
         return view('sales.create')->with('section', 'Crear venta');
     }
 
     public function createWithNewClient()
     {
+
 
         return view('sales.create-noregister-client')->with('section', 'Crear venta');
     }
@@ -143,6 +145,22 @@ class SaleController extends Controller
             'cedula_cliente' => "required",
         ]);
 
+        $client = new Client();
+
+        $client->first_name = $request->nombre_cliente;
+
+        $client->last_name = $request->apellido_cliente;
+
+        $client->phone_number = $request->telefono_cliente;
+
+        $client->comment = $request->comentario_cliente;
+
+        $client->document = $request->cedula_cliente;
+
+        $client->documentType()->associate(DocumentType::find($request->tipo_documento_cliente));
+
+        $client->save();
+
         // Check if products has stock
         foreach ($request->productos as $product) {
 
@@ -161,7 +179,7 @@ class SaleController extends Controller
 
         $sale->date = $request->fecha;
 
-        $sale->client()->associate(Client::find($request->clientId));
+        $sale->client()->associate($client->id);
 
         $sale->payment_method_id = $request->metodo_de_pago;
 
@@ -186,21 +204,7 @@ class SaleController extends Controller
             );
         }
 
-        $client = new Client();
 
-        $client->first_name = $request->nombre_cliente;
-
-        $client->last_name = $request->apellido_cliente;
-
-        $client->phone_number = $request->telefono_cliente;
-
-        $client->comment = $request->comentario_cliente;
-
-        $client->document = $request->cedula_cliente;
-
-        $client->documentType()->associate(DocumentType::find($request->tipo_documento_cliente));
-
-        $client->save();
         return 'exitooo';
     }
 
