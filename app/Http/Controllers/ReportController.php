@@ -155,4 +155,9 @@ class ReportController extends Controller
 
         return (new FastExcel($asd))->download('reporte.xlsx');
     }
+
+    public function getProductosViewVue()
+    {
+        return view('report/reportProducts2')->with('section', 'Reporte de productos');
+    }
 }

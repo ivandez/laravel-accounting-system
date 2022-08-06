@@ -23,6 +23,11 @@ Vue.component(
     require("./components/AddProductsWithNoregisterClient.vue").default
 );
 
+Vue.component(
+    "report-products",
+    require("./components/ReportProducts.vue").default
+);
+
 const app = new Vue({
     el: "#app",
 });

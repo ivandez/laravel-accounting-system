@@ -42,3 +42,5 @@ Route::post('/sales/store', [\App\Http\Controllers\SaleController::class, 'store
 Route::post('/sales/store-no-client', [\App\Http\Controllers\SaleController::class, 'storeNewClient'])->name('sales.store-no-client');
 
 Route::post('/expenses/store', [\App\Http\Controllers\ExpenseController::class, 'store'])->name('expenses.store');
+
+Route::post('/test-report', [\App\Http\Controllers\ReportController::class, 'getProductos']);
