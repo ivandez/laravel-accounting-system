@@ -44,6 +44,9 @@ class ClientController extends Controller
     {
         $request->validate([
             'nombres' => 'required|max:254',
+            'tipo_de_documento' => 'required',
+            'telefono' => 'required',
+            'documento' => 'required',
         ]);
 
         $client = new Client();

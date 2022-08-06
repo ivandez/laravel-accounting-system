@@ -23,7 +23,7 @@
 
                     <div class="form-group mb-3">
                         <label for="exampleInputName">Nombres</label>
-                        <input required type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" name="nombres">
+                        <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" name="nombres">
                     </div>
 
                     <div class="form-group mb-3">
@@ -32,12 +32,12 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="exampleInputPhoneNumber">Número de teléfono (opcional)</label>
+                        <label for="exampleInputPhoneNumber">Número de teléfono</label>
                         <input type="text" class="form-control" id="exampleInputPhoneNumber" name="telefono">
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="apellidos">Documento (opcional):</label>
+                        <label for="apellidos">Documento:</label>
                         <div class="row">
                             <div class="col">
                                 <select class="form-select" aria-label="Default select example" name="tipo_de_documento">
