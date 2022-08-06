@@ -76,6 +76,7 @@ class SaleController extends Controller
             'metodo_de_pago' => 'required',
             'pagado' => 'required',
             'fecha' => 'required',
+            'clientId' => "required",
         ]);
 
         // Check if products has stock

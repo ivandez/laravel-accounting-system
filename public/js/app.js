@@ -2217,6 +2217,74 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2262,10 +2330,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = 'http://localhost/api/';
+                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
                 _context.prev = 1;
                 _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('products');
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("products");
 
               case 4:
                 response = _context.sent;
@@ -2295,10 +2363,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = 'http://localhost/api/';
+                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
                 _context2.prev = 1;
                 _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('clients');
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("clients");
 
               case 4:
                 response = _context2.sent;
@@ -2328,10 +2396,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = 'http://localhost/api/';
+                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
                 _context3.prev = 1;
                 _context3.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('payment-methods');
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("payment-methods");
 
               case 4:
                 response = _context3.sent;
@@ -2364,7 +2432,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       if ((0,_helpers_checkIfIdExists__WEBPACK_IMPORTED_MODULE_2__.checkIfIdExists)(this.productId, this.form.productos)) {
-        console.log('el producto ya existe');
+        console.log("el producto ya existe");
         return;
       }
 
@@ -2396,15 +2464,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = 'http://localhost/api/';
+                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
                 _context4.prev = 1;
                 _context4.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('sales/store', _this5.form);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("sales/store", _this5.form);
 
               case 4:
                 _this5.showErrorAlert = false;
-                window.alert('Venta creada exitosamente');
-                window.location.href = 'http://localhost/ventas';
+                window.alert("Venta creada exitosamente");
+                window.location.href = "http://localhost/ventas";
                 _context4.next = 12;
                 break;
 
@@ -2412,10 +2480,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context4.prev = 9;
                 _context4.t0 = _context4["catch"](1);
 
-                if (_context4.t0.response.data === 'no stock') {
+                if (_context4.t0.response.data === "no stock") {
                   // fking shit not work
                   _this5.showErrorAlert = false;
-                  _this5.noStock = 'Uno o más productos no tienen stock';
+                  _this5.noStock = "Uno o más productos no tienen stock";
                 } else {
                   _this5.noStock = null;
                   _this5.errors = Object.values(_context4.t0.response.data.errors);
@@ -2453,8 +2521,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context5.next = 2;
               return _this6.getProducts().then(function (response) {
                 if (response.data.length == 0) {
-                  window.alert('No hay productos en el inventario, por favor agrega un producto');
-                  window.location.href = 'http://localhost/productos';
+                  window.alert("No hay productos en el inventario, por favor agrega un producto");
+                  window.location.href = "http://localhost/productos";
                 }
               });
 
@@ -21492,12 +21560,14 @@ var render = function () {
                 { key: product.id, domProps: { value: product.id } },
                 [
                   _vm._v(
-                    _vm._s(
-                      product.name +
-                        " (Cantidad disponible: " +
-                        product.quantity +
-                        ")"
-                    ) + "\n                    "
+                    "\n                        " +
+                      _vm._s(
+                        product.name +
+                          " (Cantidad disponible: " +
+                          product.quantity +
+                          ")"
+                      ) +
+                      "\n                    "
                   ),
                 ]
               )
@@ -21538,7 +21608,7 @@ var render = function () {
               attrs: { type: "button" },
               on: { click: _vm.addProduct },
             },
-            [_vm._v("Agregar")]
+            [_vm._v("\n                    Agregar\n                ")]
           ),
         ]),
       ]),
@@ -21560,7 +21630,7 @@ var render = function () {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col" }, [
           _c("label", { staticClass: "form-label", attrs: { for: "client" } }, [
-            _vm._v("Cliente (opcional): "),
+            _vm._v("Cliente: "),
           ]),
           _vm._v(" "),
           _c(
@@ -21600,7 +21670,8 @@ var render = function () {
                 { key: client.id, domProps: { value: client.id } },
                 [
                   _vm._v(
-                    _vm._s(client.first_name + client.last_name) +
+                    "\n                        " +
+                      _vm._s(client.first_name + client.last_name) +
                       "\n                    "
                   ),
                 ]
@@ -21719,7 +21790,7 @@ var render = function () {
           _c(
             "label",
             { staticClass: "form-label", attrs: { for: "metodo_de_pago" } },
-            [_vm._v("Método de pago: ")]
+            [_vm._v("Método de pago:\n                ")]
           ),
           _vm._v(" "),
           _c(
@@ -21815,7 +21886,7 @@ var render = function () {
               attrs: { type: "button" },
               on: { click: _vm.submitData },
             },
-            [_vm._v("Crear Venta")]
+            [_vm._v("\n                    Crear Venta\n                ")]
           ),
         ]),
       ]),
