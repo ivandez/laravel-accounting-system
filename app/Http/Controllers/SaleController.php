@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bussines;
 use App\Models\Client;
+use App\Models\DocumentType;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Services\GetBalanceService;
@@ -128,6 +129,78 @@ class SaleController extends Controller
             );
         }
 
+        return 'exitooo';
+    }
+    public function storeNewClient(Request $request)
+    {
+        $request->validate([
+            'productos' => 'required',
+            'metodo_de_pago' => 'required',
+            'pagado' => 'required',
+            'fecha' => 'required',
+            'nombre_cliente' => "required",
+            'tipo_documento_cliente' => "required",
+            'cedula_cliente' => "required",
+        ]);
+
+        // Check if products has stock
+        foreach ($request->productos as $product) {
+
+            $hasStock = Product::hasStock($product['id'], $product['quantity']);
+
+            if (!$hasStock) {
+                return response()->json('no stock', 422);
+            }
+        }
+
+        $sale = new Sale();
+
+        $sale->comment = $request->comentario;
+
+        $sale->is_paid = $request->pagado;
+
+        $sale->date = $request->fecha;
+
+        $sale->client()->associate(Client::find($request->clientId));
+
+        $sale->payment_method_id = $request->metodo_de_pago;
+
+        $sale->serial_number = Sale::getSerialNumber();
+
+        $sale->save();
+
+        foreach ($request->productos as $product) {
+            $p = Product::find($product['id']);
+
+            $p->quantity -= $product['quantity'];
+
+            $p->save();
+
+            $sale->products()->attach(
+                $product['id'],
+                [
+                    'quantity' => $product['quantity'],
+                    'product_price' => $product['product_price'],
+                    'product_cost' => $p->cost_price,
+                ]
+            );
+        }
+
+        $client = new Client();
+
+        $client->first_name = $request->nombre_cliente;
+
+        $client->last_name = $request->apellido_cliente;
+
+        $client->phone_number = $request->telefono_cliente;
+
+        $client->comment = $request->comentario_cliente;
+
+        $client->document = $request->cedula_cliente;
+
+        $client->documentType()->associate(DocumentType::find($request->tipo_documento_cliente));
+
+        $client->save();
         return 'exitooo';
     }
 

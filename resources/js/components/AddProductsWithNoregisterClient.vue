@@ -73,20 +73,84 @@
             <div class="row">
                 <div class="col">
                     <label for="client" class="form-label">Cliente: </label>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="exampleInputName">Nombres</label>
+                    <input
+                        required
+                        type="text"
+                        class="form-control"
+                        id="exampleInputName"
+                        aria-describedby="nameHelp"
+                        name="nombres"
+                        v-model="form.nombre_cliente"
+                    />
+                </div>
 
-                    <select
-                        id="client"
-                        class="form-select"
-                        v-model="form.clientId"
+                <div class="form-group mb-3">
+                    <label for="apellidos">Apellidos (opcional):</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="apellidos"
+                        aria-describedby="nameHelp"
+                        name="apellidos"
+                        v-model="form.apellido_cliente"
+                    />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="exampleInputPhoneNumber"
+                        >Número de teléfono (opcional)</label
                     >
-                        <option
-                            v-for="client in clients"
-                            :key="client.id"
-                            v-bind:value="client.id"
-                        >
-                            {{ client.first_name + client.last_name }}
-                        </option>
-                    </select>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="exampleInputPhoneNumber"
+                        name="telefono"
+                        v-model="form.telefono_cliente"
+                    />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="apellidos">Documento (opcional):</label>
+                    <div class="row">
+                        <div class="col">
+                            <select
+                                class="form-select"
+                                aria-label="Default select example"
+                                name="tipo_de_documento"
+                                v-model="form.tipo_documento_cliente"
+                            >
+                                <option value="1">V-</option>
+                                <option value="2">J-</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <input
+                                type="number"
+                                min="1"
+                                class="form-control"
+                                placeholder="Ejemplo: 999999999"
+                                name="documento"
+                                id="documento"
+                                v-model="form.cedula_cliente"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label"
+                        >Comentario (opcional):</label
+                    >
+                    <textarea
+                        class="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="3"
+                        name="comentario"
+                        v-model="form.comentario_cliente"
+                    ></textarea>
                 </div>
             </div>
 
@@ -211,13 +275,18 @@ export default {
             showErrorAlert: false,
             noStock: null,
             form: {
-                clientId: null,
                 // These are the products added to the Sale
                 productos: [],
                 comentario: null,
                 pagado: null,
                 fecha: null,
                 metodo_de_pago: null,
+                nombre_cliente: null,
+                apellido_cliente: null,
+                telefono_cliente: null,
+                tipo_documento_cliente: 1,
+                cedula_cliente: null,
+                comentario_cliente: null,
             },
             total: 0,
         };
@@ -294,9 +363,12 @@ export default {
         },
         async submitData() {
             axios.defaults.baseURL = "http://localhost/api/";
-
+            console.log(this.form);
             try {
-                await axios.post("sales/store", this.form);
+                const rest = await axios.post(
+                    "sales/store-no-client",
+                    this.form
+                );
 
                 this.showErrorAlert = false;
 

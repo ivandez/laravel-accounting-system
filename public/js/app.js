@@ -2769,6 +2769,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2793,13 +2857,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       showErrorAlert: false,
       noStock: null,
       form: {
-        clientId: null,
         // These are the products added to the Sale
         productos: [],
         comentario: null,
         pagado: null,
         fecha: null,
-        metodo_de_pago: null
+        metodo_de_pago: null,
+        nombre_cliente: null,
+        apellido_cliente: null,
+        telefono_cliente: null,
+        tipo_documento_cliente: 1,
+        cedula_cliente: null,
+        comentario_cliente: null
       },
       total: 0
     };
@@ -2944,25 +3013,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var rest;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
-                _context4.prev = 1;
-                _context4.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("sales/store", _this5.form);
+                console.log(_this5.form);
+                _context4.prev = 2;
+                _context4.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("sales/store-no-client", _this5.form);
 
-              case 4:
+              case 5:
+                rest = _context4.sent;
                 _this5.showErrorAlert = false;
                 window.alert("Venta creada exitosamente");
                 window.location.href = "http://localhost/ventas";
-                _context4.next = 12;
+                _context4.next = 14;
                 break;
 
-              case 9:
-                _context4.prev = 9;
-                _context4.t0 = _context4["catch"](1);
+              case 11:
+                _context4.prev = 11;
+                _context4.t0 = _context4["catch"](2);
 
                 if (_context4.t0.response.data === "no stock") {
                   // fking shit not work
@@ -2974,12 +3046,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this5.showErrorAlert = true;
                 }
 
-              case 12:
+              case 14:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[1, 9]]);
+        }, _callee4, null, [[2, 11]]);
       }))();
     },
     getActualDate: function getActualDate() {
@@ -22605,57 +22677,225 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("label", { staticClass: "form-label", attrs: { for: "client" } }, [
-            _vm._v("Cliente: "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group mb-3" }, [
+          _c("label", { attrs: { for: "exampleInputName" } }, [
+            _vm._v("Nombres"),
           ]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.clientId,
-                  expression: "form.clientId",
-                },
-              ],
-              staticClass: "form-select",
-              attrs: { id: "client" },
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.form,
-                    "clientId",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.nombre_cliente,
+                expression: "form.nombre_cliente",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              required: "",
+              type: "text",
+              id: "exampleInputName",
+              "aria-describedby": "nameHelp",
+              name: "nombres",
+            },
+            domProps: { value: _vm.form.nombre_cliente },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "nombre_cliente", $event.target.value)
               },
             },
-            _vm._l(_vm.clients, function (client) {
-              return _c(
-                "option",
-                { key: client.id, domProps: { value: client.id } },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group mb-3" }, [
+          _c("label", { attrs: { for: "apellidos" } }, [
+            _vm._v("Apellidos (opcional):"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.apellido_cliente,
+                expression: "form.apellido_cliente",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "apellidos",
+              "aria-describedby": "nameHelp",
+              name: "apellidos",
+            },
+            domProps: { value: _vm.form.apellido_cliente },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "apellido_cliente", $event.target.value)
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group mb-3" }, [
+          _c("label", { attrs: { for: "exampleInputPhoneNumber" } }, [
+            _vm._v("Número de teléfono (opcional)"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.telefono_cliente,
+                expression: "form.telefono_cliente",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "exampleInputPhoneNumber",
+              name: "telefono",
+            },
+            domProps: { value: _vm.form.telefono_cliente },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "telefono_cliente", $event.target.value)
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group mb-3" }, [
+          _c("label", { attrs: { for: "apellidos" } }, [
+            _vm._v("Documento (opcional):"),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.tipo_documento_cliente,
+                      expression: "form.tipo_documento_cliente",
+                    },
+                  ],
+                  staticClass: "form-select",
+                  attrs: {
+                    "aria-label": "Default select example",
+                    name: "tipo_de_documento",
+                  },
+                  on: {
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "tipo_documento_cliente",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                  },
+                },
                 [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(client.first_name + client.last_name) +
-                      "\n                    "
-                  ),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("V-")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("J-")]),
                 ]
-              )
-            }),
-            0
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.cedula_cliente,
+                    expression: "form.cedula_cliente",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "number",
+                  min: "1",
+                  placeholder: "Ejemplo: 999999999",
+                  name: "documento",
+                  id: "documento",
+                },
+                domProps: { value: _vm.form.cedula_cliente },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "cedula_cliente", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c(
+            "label",
+            {
+              staticClass: "form-label",
+              attrs: { for: "exampleFormControlTextarea1" },
+            },
+            [_vm._v("Comentario (opcional):")]
           ),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.comentario_cliente,
+                expression: "form.comentario_cliente",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              id: "exampleFormControlTextarea1",
+              rows: "3",
+              name: "comentario",
+            },
+            domProps: { value: _vm.form.comentario_cliente },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "comentario_cliente", $event.target.value)
+              },
+            },
+          }),
         ]),
       ]),
       _vm._v(" "),
@@ -22870,7 +23110,18 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col" }, [
+      _c("label", { staticClass: "form-label", attrs: { for: "client" } }, [
+        _vm._v("Cliente: "),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
