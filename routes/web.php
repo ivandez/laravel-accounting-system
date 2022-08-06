@@ -11,6 +11,7 @@ use \App\Http\Controllers\BussinesController;
 use \App\Http\Controllers\StatisticController;
 use \App\Http\Controllers\ReportController;
 use \App\Http\Controllers\HelpController;
+use \App\Http\Controllers\TagController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,6 +90,23 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/update/{product}', [ProductController::class, 'update'])->name('products.update');
         Route::post('/delete/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
         Route::get('/buscar', [ProductController::class, 'query'])->name('products.query');
+    });
+
+    // TAG
+    Route::prefix('tag')->group(function () {
+        Route::get('/', [TagController::class, 'index'])->name('tag.index');
+        // Route::get('/preparar-venta', [SaleController::class, 'prepararVenta'])->name('sales.prepararVenta');
+        // Route::get('/venta-con-nuevo-cliente', [SaleController::class, 'createWithNewClient'])->name('sales.create-with-new-client');
+        // Route::post('/store', [SaleController::class, 'store'])->name('sales.store');
+        // Route::get('/ver/{sale}', [SaleController::class, 'show'])->name('sales.show');
+        // Route::put('/update/{sale}', [SaleController::class, 'update'])->name('sales.update');
+        // Route::post('/delete/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
+        // Route::get('/buscar', [SaleController::class, 'query'])->name('sales.query');
+        // Route::get('/crear', [SaleController::class, 'create'])->name('sales.create');
+        // Route::get('/por-cobrar', [SaleController::class, 'toPay'])->name('sales.toPay');
+        // Route::get('/buscar-por-pagar', [SaleController::class, 'queryToPay'])->name('sales.queryToPay');
+        // Route::get('/invoce/{sale}', [SaleController::class, 'getInvoice'])->name('sales.getInvoice');
+        // Route::put('/update-status/{sale}', [SaleController::class, 'updateStatus'])->name('sales.updateStatus');
     });
 
     // Users

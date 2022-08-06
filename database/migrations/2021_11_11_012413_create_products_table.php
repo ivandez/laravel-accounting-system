@@ -21,6 +21,8 @@ class CreateProductsTable extends Migration
             $table->decimal('cost_price');
             $table->string('description')->nullable();
             $table->integer('quantity');
+            $table->unsignedBigInteger('tag_id')->nullable();
+            $table->foreign('tag_id')->references('id')->on('tags');
             $table->string('create_by');
             $table->timestamps();
         });
