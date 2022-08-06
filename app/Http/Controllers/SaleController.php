@@ -44,6 +44,13 @@ class SaleController extends Controller
         return view('sales.index', compact('sales', 'ventasTotales', 'gastosTotales', 'utilidadTotal', 'empresa', 'section'));
     }
 
+    public function prepararVenta()
+    {
+        $section = "Preparar venta";
+
+        return view('sales.prepare-sale', compact('section'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

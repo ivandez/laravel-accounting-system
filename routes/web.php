@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
     // SALES
     Route::prefix('ventas')->group(function () {
         Route::get('/', [SaleController::class, 'index'])->name('sales.index');
+        Route::get('/preparar-venta', [SaleController::class, 'prepararVenta'])->name('sales.prepararVenta');
+        Route::get('/venta-con-nuevo-cliente', [SaleController::class, 'createWithNewClient'])->name('sales.create-with-new-client');
         Route::post('/store', [SaleController::class, 'store'])->name('sales.store');
         Route::get('/ver/{sale}', [SaleController::class, 'show'])->name('sales.show');
         Route::put('/update/{sale}', [SaleController::class, 'update'])->name('sales.update');
