@@ -46,6 +46,19 @@
                         <input type="number" min="1" class="form-control" name="cantidad" id="cantidad">
                     </div>
 
+                    <div class="form-group mb-3">
+                        <label for="apellidos">Tag o categoria:</label>
+                        <div class="row">
+                            <div class="col">
+                                <select class="form-select" aria-label="Default select example" name="tag">
+                                    @foreach($tags as $tag)
+                                        <option value="{{ $tag->id }}"> {{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-success">Crear producto</button>
                     <a href="{{ route('products.index') }}" type="button" class="btn btn-danger">Volver atrás</a>
                 </form>

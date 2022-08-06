@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DocumentType;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,9 +35,11 @@ class ProductController extends Controller
     {
         $documentsTypes = DocumentType::all();
 
+        $tags = Tag::all();
+
         $section = 'Crear productos';
 
-        return view('products.create', compact('documentsTypes', 'section'));
+        return view('products.create', compact('documentsTypes', 'section', 'tags'));
     }
 
     /**
@@ -69,6 +72,10 @@ class ProductController extends Controller
         $product->serial_number = Product::getSerialNumber();
 
         $product->create_by =  Auth::user()->name;
+
+        $tag = Tag::find($request->tag);
+
+        $product->tag_id = $tag->id;
 
         $product->save();
 

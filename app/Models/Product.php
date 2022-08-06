@@ -65,12 +65,13 @@ class Product extends Model
         $asd =  $orgProducts->map(function ($item, $key) {
             return [
                 "name" => $item[0]->name,
-                "quantity" => $item->sum('quantity')];
+                "quantity" => $item->sum('quantity')
+            ];
         });
 
         $newArray = [];
 
-        foreach ($asd as $element){
+        foreach ($asd as $element) {
             $newArray[] = $element;
         }
 
@@ -81,4 +82,8 @@ class Product extends Model
         return $sorted->values()->all();
     }
 
+    public function tag()
+    {
+        return $this->hasOne(Tag::class);
+    }
 }
