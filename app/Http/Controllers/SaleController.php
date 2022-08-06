@@ -62,6 +62,12 @@ class SaleController extends Controller
         return view('sales.create')->with('section', 'Crear venta');
     }
 
+    public function createWithNewClient()
+    {
+
+        return view('sales.create-noregister-client')->with('section', 'Crear venta');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
