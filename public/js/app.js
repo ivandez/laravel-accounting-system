@@ -3891,7 +3891,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
                 _context4.prev = 1;
                 _context4.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("test-report", _this5.form, {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("reporte-productos", {
+                  orden: "desc"
+                }, {
                   responseType: "arraybuffer"
                 });
 

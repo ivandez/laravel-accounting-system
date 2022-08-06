@@ -297,9 +297,13 @@ export default {
             axios.defaults.baseURL = "http://localhost/api/";
 
             try {
-                const res = await axios.post("test-report", this.form, {
-                    responseType: "arraybuffer",
-                });
+                const res = await axios.post(
+                    "reporte-productos",
+                    { orden: "desc" },
+                    {
+                        responseType: "arraybuffer",
+                    }
+                );
                 console.log(
                     "🚀 ~ file: AddProducts.vue ~ line 301 ~ submitData ~ res",
                     res
