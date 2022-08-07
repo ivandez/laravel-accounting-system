@@ -3507,6 +3507,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Alert_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Alert.vue */ "./resources/js/components/Alert.vue");
 
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3519,139 +3523,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3720,32 +3591,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      // These are the product fetched from API
-      products: [{}],
-      // This is the product ID selected in form
-      productId: 0,
-      quantity: 1,
-      // This is the data of the product
-      clients: [],
-      paymentMethods: null,
-      errors: null,
-      showErrorAlert: false,
-      noStock: null,
+      tags: [],
+      tagId: null,
       form: {
-        clientId: null,
-        // These are the products added to the Sale
-        productos: [],
-        comentario: null,
-        pagado: null,
-        fecha: null,
-        metodo_de_pago: null
-      },
-      total: 0
+        tags: [],
+        orden: "asc"
+      }
     };
   },
   methods: {
-    getProducts: function getProducts() {
+    addTag: function addTag() {
       var _this = this;
+
+      if (this.tagId === null) {
+        return;
+      }
+
+      var tag = this.tags.find(function (tag) {
+        return tag.id == _this.tagId;
+      });
+      var alreadyExists = this.form.tags.find(function (formTag) {
+        return formTag.id == tag.id;
+      });
+
+      if (alreadyExists) {
+        return;
+      }
+
+      this.form.tags.push(tag);
+    },
+    handleRemove: function handleRemove(id) {
+      var filteredTags = this.form.tags.filter(function (tag) {
+        return tag.id !== id;
+      });
+      this.form.tags = _toConsumableArray(filteredTags);
+    },
+    getTags: function getTags() {
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var response;
@@ -3756,32 +3638,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
                 _context.prev = 1;
                 _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("products");
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("tags");
 
               case 4:
                 response = _context.sent;
-                console.log(response);
-                _this.products = _toConsumableArray(response.data);
-                return _context.abrupt("return", response);
+                _this2.tags = _toConsumableArray(response.data);
+                _context.next = 11;
+                break;
 
-              case 10:
-                _context.prev = 10;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](1);
                 console.error(_context.t0);
 
-              case 13:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 10]]);
+        }, _callee, null, [[1, 8]]);
       }))();
     },
-    getClients: function getClients() {
-      var _this2 = this;
+    submitData: function submitData() {
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -3789,108 +3671,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
                 _context2.prev = 1;
                 _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("clients");
-
-              case 4:
-                response = _context2.sent;
-                _this2.clients = _toConsumableArray(response.data);
-                _context2.next = 11;
-                break;
-
-              case 8:
-                _context2.prev = 8;
-                _context2.t0 = _context2["catch"](1);
-                console.error(_context2.t0);
-
-              case 11:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[1, 8]]);
-      }))();
-    },
-    getPaymentMethods: function getPaymentMethods() {
-      var _this3 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
-                _context3.prev = 1;
-                _context3.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("payment-methods");
-
-              case 4:
-                response = _context3.sent;
-                _this3.paymentMethods = _toConsumableArray(response.data);
-                _context3.next = 11;
-                break;
-
-              case 8:
-                _context3.prev = 8;
-                _context3.t0 = _context3["catch"](1);
-                console.error(_context3.t0);
-
-              case 11:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[1, 8]]);
-      }))();
-    },
-    addProduct: function addProduct() {
-      var _this4 = this;
-
-      var product = this.products.find(function (product) {
-        return product.id == _this4.productId;
-      });
-
-      if (this.productId === 0 || this.quantity == 0) {
-        return;
-      }
-
-      if ((0,_helpers_checkIfIdExists__WEBPACK_IMPORTED_MODULE_2__.checkIfIdExists)(this.productId, this.form.productos)) {
-        console.log("el producto ya existe");
-        return;
-      }
-
-      var newProduct = {
-        id: product.id,
-        name: product.name,
-        quantity: this.quantity,
-        product_price: product.unit_price
-      }; // crear la logica aqui
-
-      this.form.productos.push(newProduct);
-      this.sumTotal(newProduct);
-    },
-    handleRemove: function handleRemove(id) {
-      var filteredProducts = this.form.productos.filter(function (product) {
-        return product.id !== id;
-      });
-      var theFuckingProduct = this.form.productos.find(function (product) {
-        return product.id == id;
-      });
-      this.form.productos = _toConsumableArray(filteredProducts);
-      this.restaTotal(theFuckingProduct);
-    },
-    submitData: function submitData() {
-      var _this5 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
-                _context4.prev = 1;
-                _context4.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post("reporte-productos", {
                   orden: "desc",
                   tags: [2]
@@ -3900,7 +3680,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 );
 
               case 4:
-                res = _context4.sent;
+                res = _context2.sent;
                 console.log("🚀 ~ file: AddProducts.vue ~ line 301 ~ submitData ~ res", res); // const url = window.URL.createObjectURL(new Blob([res.data]));
                 // const a = document.createElement("a");
                 // a.href = url;
@@ -3910,76 +3690,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 // a.click();
                 // a.remove();
 
-                _context4.next = 11;
+                _context2.next = 11;
                 break;
 
               case 8:
-                _context4.prev = 8;
-                _context4.t0 = _context4["catch"](1);
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](1);
 
-                if (_context4.t0.response.data === "no stock") {
+                if (_context2.t0.response.data === "no stock") {
                   // fking shit not work
-                  _this5.showErrorAlert = false;
-                  _this5.noStock = "Uno o más productos no tienen stock";
+                  _this3.showErrorAlert = false;
+                  _this3.noStock = "Uno o más productos no tienen stock";
                 } else {
-                  _this5.noStock = null;
-                  _this5.errors = Object.values(_context4.t0.response.data.errors);
-                  _this5.showErrorAlert = true;
+                  _this3.noStock = null;
+                  _this3.errors = Object.values(_context2.t0.response.data.errors);
+                  _this3.showErrorAlert = true;
                 }
 
               case 11:
               case "end":
-                return _context4.stop();
+                return _context2.stop();
             }
           }
-        }, _callee4, null, [[1, 8]]);
+        }, _callee2, null, [[1, 8]]);
       }))();
-    },
-    getActualDate: function getActualDate() {
-      var today = new Date();
-      var actualDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-      return actualDate;
-    },
-    sumTotal: function sumTotal(newProduct) {
-      this.total += Number(newProduct.product_price) * newProduct.quantity;
-    },
-    restaTotal: function restaTotal(theFuckingProduct) {
-      this.total -= Number(theFuckingProduct.product_price) * theFuckingProduct.quantity;
     }
   },
   mounted: function mounted() {
-    var _this6 = this;
+    var _this4 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context5.prev = _context5.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              _context5.next = 2;
-              return _this6.getProducts().then(function (response) {
-                if (response.data.length == 0) {
-                  window.alert("No hay productos en el inventario, por favor agrega un producto");
-                  window.location.href = "http://localhost/productos";
-                }
-              });
+              _context3.next = 2;
+              return _this4.getTags();
 
             case 2:
-              _context5.next = 4;
-              return _this6.getClients();
-
-            case 4:
-              _context5.next = 6;
-              return _this6.getPaymentMethods();
-
-            case 6:
-              _this6.form.fecha = _this6.getActualDate();
-
-            case 7:
             case "end":
-              return _context5.stop();
+              return _context3.stop();
           }
         }
-      }, _callee5);
+      }, _callee3);
     }))();
   }
 });
@@ -24172,405 +23925,124 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("h1", [_vm._v("test")]),
-    _vm._v(" "),
-    _vm.noStock
-      ? _c("div", { staticClass: "row my-3" }, [
-          _c(
-            "div",
-            { staticClass: "alert alert-danger", attrs: { role: "alert" } },
-            [_c("ul", [_c("li", [_vm._v(_vm._s(_vm.noStock))])])]
-          ),
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showErrorAlert
-      ? _c("div", { staticClass: "row my-3" }, [
-          _c(
-            "div",
-            { staticClass: "col" },
-            [_c("alert", { attrs: { errors: _vm.errors } })],
-            1
-          ),
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "d-grid gap-3" }, [
-      _c("div", { staticClass: "row my-3" }, [
-        _c("label", { staticClass: "form-label", attrs: { for: "date" } }, [
-          _vm._v("Productos: "),
-        ]),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-3 mb-3" }, [
+        _c("label", { attrs: { for: "validationTooltip04" } }, [_vm._v("Tag")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.productId,
-                  expression: "productId",
-                },
-              ],
-              staticClass: "form-select",
-              attrs: { "aria-label": "Default select example" },
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.productId = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                },
-              },
-            },
-            _vm._l(_vm.products, function (product) {
-              return _c(
-                "option",
-                { key: product.id, domProps: { value: product.id } },
-                [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(
-                        product.name +
-                          " (Cantidad disponible: " +
-                          product.quantity +
-                          ")"
-                      ) +
-                      "\n                    "
-                  ),
-                ]
-              )
-            }),
-            0
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c("input", {
+        _c(
+          "select",
+          {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.quantity,
-                expression: "quantity",
+                value: _vm.tagId,
+                expression: "tagId",
               },
             ],
-            staticClass: "form-control",
-            attrs: { type: "number", min: "1", value: "form.quantity" },
-            domProps: { value: _vm.quantity },
+            staticClass: "custom-select",
+            attrs: { id: "tags" },
             on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.quantity = $event.target.value
+              change: function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.tagId = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
               },
             },
+          },
+          _vm._l(_vm.tags, function (tag) {
+            return _c("option", { key: tag.id, domProps: { value: tag.id } }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(tag.name) +
+                  "\n                "
+              ),
+            ])
           }),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "button" },
-              on: { click: _vm.addProduct },
-            },
-            [_vm._v("\n                    Agregar\n                ")]
-          ),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col" },
-          [
-            _c("added-products-table", {
-              attrs: { data: _vm.form.productos, total: _vm.total },
-              on: { listenChild: _vm.handleRemove },
-            }),
-          ],
-          1
+          0
         ),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("label", { staticClass: "form-label", attrs: { for: "client" } }, [
-            _vm._v("Cliente: "),
-          ]),
+      _c("div", { staticClass: "col-md-3 mb-3" }, [
+        _c("label", { attrs: { for: "validationTooltip05" } }, [
+          _vm._v("Opción"),
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary form-control",
+            attrs: { type: "button" },
+            on: { click: _vm.addTag },
+          },
+          [_vm._v("\n                Agregar\n            ")]
+        ),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("table", { staticClass: "table table-striped" }, [
+          _vm._m(0),
           _vm._v(" "),
           _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.clientId,
-                  expression: "form.clientId",
-                },
-              ],
-              staticClass: "form-select",
-              attrs: { id: "client" },
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.form,
-                    "clientId",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-              },
-            },
-            _vm._l(_vm.clients, function (client) {
-              return _c(
-                "option",
-                { key: client.id, domProps: { value: client.id } },
-                [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(client.first_name + client.last_name) +
-                      "\n                    "
+            "tbody",
+            _vm._l(_vm.form.tags, function (tag) {
+              return _c("tr", { key: tag.id }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(tag.name)),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.handleRemove(tag.id)
+                        },
+                      },
+                    },
+                    [
+                      _vm._v(
+                        "\n                                ELIMINAR\n                            "
+                      ),
+                    ]
                   ),
-                ]
-              )
+                ]),
+              ])
             }),
             0
-          ),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("label", { staticClass: "form-label", attrs: { for: "date" } }, [
-            _vm._v("Fecha: "),
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.fecha,
-                expression: "form.fecha",
-              },
-            ],
-            staticClass: "form-select",
-            attrs: { id: "date", type: "date" },
-            domProps: { value: _vm.form.fecha },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "fecha", $event.target.value)
-              },
-            },
-          }),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c("div", { staticClass: "form-check" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.pagado,
-                  expression: "form.pagado",
-                },
-              ],
-              staticClass: "form-check-input",
-              attrs: {
-                checked: "",
-                type: "radio",
-                value: "1",
-                id: "flexRadioDefault1",
-              },
-              domProps: { checked: _vm._q(_vm.form.pagado, "1") },
-              on: {
-                change: function ($event) {
-                  return _vm.$set(_vm.form, "pagado", "1")
-                },
-              },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "form-check-label",
-                attrs: { for: "flexRadioDefault1" },
-              },
-              [_vm._v("\n                        Pagado\n                    ")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-check" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.pagado,
-                  expression: "form.pagado",
-                },
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "radio", value: "0", id: "flexRadioDefault2" },
-              domProps: { checked: _vm._q(_vm.form.pagado, "0") },
-              on: {
-                change: function ($event) {
-                  return _vm.$set(_vm.form, "pagado", "0")
-                },
-              },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "form-check-label",
-                attrs: { for: "flexRadioDefault2" },
-              },
-              [
-                _vm._v(
-                  "\n                        Por pagar\n                    "
-                ),
-              ]
-            ),
-          ]),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c(
-            "label",
-            { staticClass: "form-label", attrs: { for: "metodo_de_pago" } },
-            [_vm._v("Método de pago:\n                ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.metodo_de_pago,
-                  expression: "form.metodo_de_pago",
-                },
-              ],
-              staticClass: "form-select",
-              attrs: { id: "metodo_de_pago" },
-              on: {
-                change: function ($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function (o) {
-                      return o.selected
-                    })
-                    .map(function (o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.form,
-                    "metodo_de_pago",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-              },
-            },
-            _vm._l(_vm.paymentMethods, function (paymentMethod) {
-              return _c(
-                "option",
-                {
-                  key: paymentMethod.id,
-                  domProps: { value: paymentMethod.id },
-                },
-                [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(paymentMethod.name) +
-                      "\n                    "
-                  ),
-                ]
-              )
-            }),
-            0
-          ),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c(
-            "label",
-            { staticClass: "form-label", attrs: { for: "comentario" } },
-            [_vm._v("Comentario")]
-          ),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.comentario,
-                expression: "form.comentario",
-              },
-            ],
-            staticClass: "form-control",
-            attrs: { id: "comentario", rows: "3" },
-            domProps: { value: _vm.form.comentario },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "comentario", $event.target.value)
-              },
-            },
-          }),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "button" },
-              on: { click: _vm.submitData },
-            },
-            [_vm._v("\n                    Crear Venta\n                ")]
           ),
         ]),
       ]),
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre del tag")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Opciones")]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 

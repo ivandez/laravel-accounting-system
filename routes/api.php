@@ -37,6 +37,12 @@ Route::get('providers', function () {
     return response()->json($providers);
 });
 
+Route::get('tags', function () {
+    $providers = \App\Models\Tag::all();
+
+    return response()->json($providers);
+});
+
 Route::post('/sales/store', [\App\Http\Controllers\SaleController::class, 'store'])->name('sales.store');
 
 Route::post('/sales/store-no-client', [\App\Http\Controllers\SaleController::class, 'storeNewClient'])->name('sales.store-no-client');
