@@ -160,7 +160,6 @@ return grupos
         const monthsGastos = orderByMonth(dataGastos)
         const groudByMesesGastos = gropuByMonthGastos(dataGastos, monthsGastos)
         const gastos = sumarMesesGastos(groudByMesesGastos)
-        console.log("🚀 ~ file: index.blade.php ~ line 163 ~ fetchVentasAgno ~ gastos", gastos)
 
 
 
@@ -171,14 +170,14 @@ return grupos
             datasets: [
                 {
                 label: 'Ventas',
-                data: [sales[0].sales, sales[1].sales, sales[2].sales, sales[3].sales, sales[4].sales, sales[5].sales, sales[6].sales, sales[7].sales, sales[8].sales, sales[9].sales, sales[10].sales],
+                data: [sales[0].sales, sales[1].sales, sales[2].sales, sales[3].sales, sales[4].sales, sales[5].sales, sales[6].sales, sales[7].sales, sales[8].sales, sales[9].sales, sales[10].sales, sales[11].sales],
                 fill: false,
                 borderColor: '#97CC04',
                 tension: 0.1
             },
                 {
                 label: 'Gastos',
-                data: [gastos[0].sales, gastos[1].sales, gastos[2].sales, gastos[3].sales, gastos[4].sales, gastos[5].sales, gastos[6].sales, gastos[7].sales, gastos[8].sales, gastos[9].sales, gastos[10].sales],
+                data: [gastos[0].sales, gastos[1].sales, gastos[2].sales, gastos[3].sales, gastos[4].sales, gastos[5].sales, gastos[6].sales, gastos[7].sales, gastos[8].sales, gastos[9].sales, gastos[10].sales, gastos[11].sales],
                 fill: false,
                 borderColor: '#F04104',
                 tension: 0.1
@@ -202,7 +201,6 @@ return grupos
 
 const fetchDataPorPagar = async () => {
     const {data} = await axios.get('http://localhost/api/deudas-por-pagar');
-    console.log("🚀 ~ file: index.blade.php ~ line 71 ~ fetchData ~ data", data)
     const dataPiePorPagar = {
         labels: [
             'Deudas por Pagar',
@@ -298,10 +296,8 @@ const sumSales = (sales) => {
 const fetchDataProductosMasVendidos= async () => {
     const {data} = await axios.get("http://localhost/api/productos-mas-vendidos")
 
-    console.log("🚀 ~ file: index.blade.php ~ line 153 ~ fetchDataProductosMasVendidos ~ data", data)
 
     const sales = sumSales(data)
-    console.log("🚀 ~ file: index.blade.php ~ line 171 ~ fetchDataProductosMasVendidos ~ sales", sales)
 
     const dataBar = {
   labels: [sales[0].name, sales[1].name, sales[2].name, sales[3].name],
