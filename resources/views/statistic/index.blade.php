@@ -136,11 +136,45 @@ fetchData()
 
 </script>
 <script>
+
+const sumSales = (sales) => {
+    const totalSales = []
+
+
+    const entries = Object.entries(sales).map(item => {
+        return item
+    })
+
+    entries.forEach(item => {
+
+        const quantity = item[1].reduce((acc, curr) => {
+            return acc + curr
+        } , 0)
+
+
+        const newSale = {
+            name: item[0],
+            quantity: quantity
+        }
+        totalSales.push(newSale)
+    } )
+
+    return totalSales
+
+}
+const fetchDataProductosMasVendidos= async () => {
+    const {data} = await axios.get("http://localhost/api/productos-mas-vendidos")
+
+    console.log("🚀 ~ file: index.blade.php ~ line 153 ~ fetchDataProductosMasVendidos ~ data", data)
+
+    const sales = sumSales(data)
+    console.log("🚀 ~ file: index.blade.php ~ line 171 ~ fetchDataProductosMasVendidos ~ sales", sales)
+
     const dataBar = {
-  labels: [1,2,3,4,5,6,7],
+  labels: [sales[0].name, sales[1].name, sales[2].name, sales[3].name],
   datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 80, 81, 56, 55, 40],
+    label: 'Productos más vendidos',
+    data: [sales[0].quantity, sales[1].quantity, sales[2].quantity, sales[3].quantity],
     backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
       'rgba(255, 159, 64, 0.2)',
@@ -179,5 +213,8 @@ fetchData()
     document.getElementById('productosConMasVentas'),
     configBar
   );
+}
+fetchDataProductosMasVendidos()
+
 </script>
 @endsection

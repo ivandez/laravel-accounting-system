@@ -3,6 +3,7 @@
 use App\Models\Expense;
 use App\Models\Sale;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,4 +75,29 @@ Route::get('deudas-por-pagar', function () {
     $response = ['toPay' => $sales, 'isPaid' => $salesPagadas];
 
     return response()->json($response);
+});
+
+Route::get('productos-mas-vendidos', function () {
+
+    $asd = DB::table('products')
+        ->join('product_sale', 'products.id', '=', 'product_sale.product_id')
+        ->select(
+            '*'
+        )
+        // ->selectRaw('product_sale.product_price * product_sale.quantity as total')
+        // ->where('sales.is_paid', false)
+        // ->whereBetween('sales.date', [$request->date, $request->date2])
+        ->get();
+
+    $collection = collect($asd);
+
+    $grouped = $collection->groupBy('name');
+
+    $ventas = $grouped->map(function ($item) {
+        return $item->map(function ($item) {
+            return $item->quantity;
+        });
+    });
+
+    return response()->json($ventas);
 });
