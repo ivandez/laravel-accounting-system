@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Expense;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,17 @@ Route::get('deudas-por-cobrar', function () {
     $sales = Sale::where('is_paid', false)->get()->count();
 
     $salesPagadas = Sale::where('is_paid', true)->get()->count();
+
+    $response = ['toPay' => $sales, 'isPaid' => $salesPagadas];
+
+    return response()->json($response);
+});
+
+Route::get('deudas-por-pagar', function () {
+
+    $sales = Expense::where('is_paid', false)->get()->count();
+
+    $salesPagadas = Expense::where('is_paid', true)->get()->count();
 
     $response = ['toPay' => $sales, 'isPaid' => $salesPagadas];
 

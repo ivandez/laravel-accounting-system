@@ -16,7 +16,8 @@
                 <canvas id="deudasPorCobrar"></canvas>
             </div>
 
-            <div class="col">
+            <div class="col text-center">
+                <h2>Deudas por pagar</h2>
                 <canvas id="deudasPorPagar"></canvas>
             </div>
         </div>
@@ -66,15 +67,17 @@
 </script>
 <script>
 
+const fetchDataPorPagar = async () => {
+    const {data} = await axios.get('http://localhost/api/deudas-por-pagar');
+    console.log("🚀 ~ file: index.blade.php ~ line 71 ~ fetchData ~ data", data)
     const dataPiePorPagar = {
         labels: [
-            'Red',
-            'Blue',
-            'Yellow'
+            'Deudas por Pagar',
+            'Deudas Pagadas'
         ],
         datasets: [{
             label: 'My First Dataset',
-            data: [300, 50, 100],
+            data: [data.toPay, data.isPaid],
             backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
@@ -93,13 +96,13 @@
     document.getElementById('deudasPorPagar'),
     configPiePorPagar
   );
-
+}
+fetchDataPorPagar()
 </script>
 <script>
 
 const fetchData = async () => {
     const {data} = await axios.get("http://localhost/api/deudas-por-cobrar")
-    console.log("🚀 ~ file: index.blade.php ~ line 102 ~ fetchData ~ response", data)
 
     const dataPie = {
         labels: [
