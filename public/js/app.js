@@ -3579,6 +3579,72 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3593,8 +3659,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     return {
       tags: [],
       tagId: null,
+      keyword: null,
       form: {
         tags: [],
+        keywords: [],
         orden: "asc"
       }
     };
@@ -3619,6 +3687,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       this.form.tags.push(tag);
+    },
+    addKeyword: function addKeyword() {
+      if (this.keyword === null) {
+        return;
+      }
+
+      this.form.keywords.push(this.keyword);
+      this.keyword = null;
+    },
+    handleRemoveKeyword: function handleRemoveKeyword(keywordArg) {
+      var filteredKeyword = this.form.keywords.filter(function (keyword) {
+        return keyword !== keywordArg;
+      });
+      this.form.keywords = _toConsumableArray(filteredKeyword);
     },
     handleRemove: function handleRemove(id) {
       var filteredTags = this.form.tags.filter(function (tag) {
@@ -3663,7 +3745,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var res;
+        var res, url, a, filename;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -3671,30 +3753,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "http://localhost/api/";
                 _context2.prev = 1;
                 _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("reporte-productos", {
-                  orden: "desc",
-                  tags: [2]
-                } // {
-                //     responseType: "arraybuffer",
-                // }
-                );
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post("reporte-productos", _this3.form, {
+                  responseType: "arraybuffer"
+                });
 
               case 4:
                 res = _context2.sent;
-                console.log("🚀 ~ file: AddProducts.vue ~ line 301 ~ submitData ~ res", res); // const url = window.URL.createObjectURL(new Blob([res.data]));
-                // const a = document.createElement("a");
-                // a.href = url;
-                // const filename = `file.xlsx`;
-                // a.setAttribute("download", filename);
-                // document.body.appendChild(a);
-                // a.click();
-                // a.remove();
-
-                _context2.next = 11;
+                console.log("🚀 ~ file: AddProducts.vue ~ line 301 ~ submitData ~ res", res);
+                url = window.URL.createObjectURL(new Blob([res.data]));
+                a = document.createElement("a");
+                a.href = url;
+                filename = "file.xlsx";
+                a.setAttribute("download", filename);
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                _context2.next = 19;
                 break;
 
-              case 8:
-                _context2.prev = 8;
+              case 16:
+                _context2.prev = 16;
                 _context2.t0 = _context2["catch"](1);
 
                 if (_context2.t0.response.data === "no stock") {
@@ -3707,12 +3785,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                   _this3.showErrorAlert = true;
                 }
 
-              case 11:
+              case 19:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 8]]);
+        }, _callee2, null, [[1, 16]]);
       }))();
     }
   },
@@ -23925,7 +24003,100 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row mt-3" }, [
+      _c("div", { staticClass: "col-md-3 mb-3" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Palabras a buscar"),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.keyword,
+                expression: "keyword",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "email",
+              id: "exampleInputEmail1",
+              "aria-describedby": "emailHelp",
+              placeholder: "Ejemplo: hamburgesa 120g....",
+            },
+            domProps: { value: _vm.keyword },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.keyword = $event.target.value
+              },
+            },
+          }),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3 mb-3" }, [
+        _c("label", { attrs: { for: "validationTooltip05" } }, [
+          _vm._v("Opción"),
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary form-control",
+            attrs: { type: "button" },
+            on: { click: _vm.addKeyword },
+          },
+          [_vm._v("\n                Agregar\n            ")]
+        ),
+      ]),
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("table", { staticClass: "table table-striped" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.form.keywords, function (keyword) {
+              return _c("tr", { key: keyword }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(keyword)),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.handleRemoveKeyword(keyword)
+                        },
+                      },
+                    },
+                    [
+                      _vm._v(
+                        "\n                                ELIMINAR\n                            "
+                      ),
+                    ]
+                  ),
+                ]),
+              ])
+            }),
+            0
+          ),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mt-3" }, [
       _c("div", { staticClass: "col-md-3 mb-3" }, [
         _c("label", { attrs: { for: "validationTooltip04" } }, [_vm._v("Tag")]),
         _vm._v(" "),
@@ -23991,7 +24162,7 @@ var render = function () {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col" }, [
         _c("table", { staticClass: "table table-striped" }, [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
@@ -24027,9 +24198,35 @@ var render = function () {
         ]),
       ]),
     ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button" },
+            on: { click: _vm.submitData },
+          },
+          [_vm._v("\n                Descargar excel\n            ")]
+        ),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre del tag")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Opciones")]),
+      ]),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

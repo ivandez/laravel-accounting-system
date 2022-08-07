@@ -125,7 +125,19 @@ class ReportController extends Controller
 
     public function getProductos(Request $request)
     {
-        return $asd = DB::table('products')
+        $tagsCollect = collect($request->tags);
+
+        $tags = $tagsCollect->map(function ($item) {
+            return $item['id'];
+        });
+
+        $tagsMayorCero = count($tags) > 0 ? true : false;
+
+        $keywords = $request->keywords;
+
+        $keywordsMayorCero = count($keywords) > 0 ? true : false;
+
+        $asd = DB::table('products')
             ->select(
                 'products.name as nombre',
                 'products.serial_number as serial',
@@ -134,11 +146,16 @@ class ReportController extends Controller
                 'products.quantity AS cantidad',
                 'products.create_by AS creado por',
                 'products.created_at AS fecha de creación',
+                'products.tag_id',
             )
-            ->when($request->tags, function ($query) use ($request) {
-                return $query->whereIn('tag_id', $request->tags);
+            ->when($tagsMayorCero, function ($query) use ($tags) {
+                return $query->whereIn('tag_id', $tags);
             })
-            ->orderBy('created_at', $request->orden)
+            ->when($keywordsMayorCero, function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('name', 'LIKE', '%' . $keyword . '%');
+                }
+            })
             ->get();
 
         return (new FastExcel($asd))->download('reporte.xlsx');
