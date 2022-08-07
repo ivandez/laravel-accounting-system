@@ -50,3 +50,9 @@ Route::post('/sales/store-no-client', [\App\Http\Controllers\SaleController::cla
 Route::post('/expenses/store', [\App\Http\Controllers\ExpenseController::class, 'store'])->name('expenses.store');
 
 Route::post('/reporte-productos', [\App\Http\Controllers\ReportController::class, 'getProductos']);
+
+// Estadisticas
+Route::get('tests', function () {
+
+    return response()->json('jeje');
+});

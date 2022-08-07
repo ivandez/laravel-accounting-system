@@ -63,6 +63,7 @@
   );
 </script>
 <script>
+
     const dataPiePorPagar = {
         labels: [
             'Red',
@@ -90,6 +91,8 @@
     document.getElementById('deudasPorPagar'),
     configPiePorPagar
   );
+
+  axios.get("http://localhost/api/tests").then(res => console.log(res));
 </script>
 <script>
     const dataPie = {
