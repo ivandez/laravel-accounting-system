@@ -36,6 +36,69 @@
 @section('scripts')
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
+
+const buildGropu = (months) => {
+
+let grupos = []
+
+months.forEach(item => {
+    grupos.push({month: item, data:  []})
+} )
+
+return grupos
+}
+
+    const orderByMonth = (arr) => {
+        let months = []
+
+        arr.forEach(item => {
+            const month = item.date.split('-')
+
+            const monthExists = months.find(m => m === month[1])
+
+            if(!monthExists){
+
+                months.push(month[1])
+            }
+        } )
+       return buildGropu(months)
+    }
+
+
+    const deleteRepeteatCode = (arr) => {
+        let newArr = []
+        arr.forEach(item => {
+            const codeExists = newArr.find(m => m.serial_number === item.serial_number)
+
+            if(!codeExists){
+                newArr.push(item)
+            }
+        } )
+        return newArr
+    }
+
+    const gropuByMonth = (arr, months) => {
+
+        const filterArr =   deleteRepeteatCode(arr)
+        filterArr.forEach(item => {
+
+            const month = item.date.split('-')
+
+            const mIndex = months.findIndex((m) => m.month === month[1])
+
+            months[mIndex].data.push(item)
+
+        } )
+       return months
+    }
+
+    const fetchVentasAgno = async () => {
+        const {data} = await axios.get('/api/ventas-del-agno');
+        const months = orderByMonth(data)
+        gropuByMonth(data, months)
+        console.log("🚀 ~ file: index.blade.php ~ line 82 ~ fetchVentasAgno ~ gropuByMonth(data, months)", gropuByMonth(data, months))
+    }
+    fetchVentasAgno()
     const data = {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [

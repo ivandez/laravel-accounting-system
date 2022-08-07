@@ -101,3 +101,17 @@ Route::get('productos-mas-vendidos', function () {
 
     return response()->json($ventas);
 });
+
+Route::get('ventas-del-agno', function () {
+
+    $asd = DB::table('sales')
+        ->join('product_sale', 'sales.id', '=', 'product_sale.sale_id')
+        ->select(
+            '*'
+        )
+        ->get();
+
+    $collection = collect($asd);
+
+    return response()->json($asd);
+});
