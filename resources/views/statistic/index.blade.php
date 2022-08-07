@@ -92,41 +92,65 @@ return grupos
        return months
     }
 
-    const fetchVentasAgno = async () => {
-        const {data} = await axios.get('/api/ventas-del-agno');
-        const months = orderByMonth(data)
-        gropuByMonth(data, months)
-        console.log("🚀 ~ file: index.blade.php ~ line 82 ~ fetchVentasAgno ~ gropuByMonth(data, months)", gropuByMonth(data, months))
-    }
-    fetchVentasAgno()
-    const data = {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-        datasets: [
-            {
-            label: 'Ventas',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: '#97CC04',
-            tension: 0.1
-        },
-            {
-            label: 'Gastos',
-            data: [60,40,100,200,300,50,20],
-            fill: false,
-            borderColor: '#F04104',
-            tension: 0.1
-        },
-    ]
-    };
-    const config = {
-        type: 'line',
-        data: data,
-    };
+    const sumarMeses = (arr) => {
+        let sales2 = []
 
-    const myChart = new Chart(
-    document.getElementById('ventasYgastos'),
-    config
-  );
+        arr.forEach(item => {
+
+            const sales = item.data.reduce(
+                (previousValue, currentValue) => previousValue + parseInt(currentValue.product_price),
+                0
+                );
+
+            let newArr = {
+                month: item.month,
+                sales: sales
+            }
+
+            sales2.push(newArr)
+
+        } )
+
+        return sales2.sort(function(a, b){return a.month-b.month})
+    }
+
+    const fetchVentasAgno = async () => {
+        const {data:dataVEntas} = await axios.get('/api/ventas-del-agno');
+        const months = orderByMonth(dataVEntas)
+        const groudByMeses = gropuByMonth(dataVEntas, months)
+        const sales = sumarMeses(groudByMeses)
+
+        const data = {
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            datasets: [
+                {
+                label: 'Ventas',
+                data: [sales[0].sales, sales[1].sales, sales[2].sales, sales[3].sales, sales[4].sales, sales[5].sales, sales[6].sales, sales[7].sales, sales[8].sales, sales[9].sales, sales[10].sales],
+                fill: false,
+                borderColor: '#97CC04',
+                tension: 0.1
+            },
+                {
+                label: 'Gastos',
+                data: [60,40,100,200,300,50,20],
+                fill: false,
+                borderColor: '#F04104',
+                tension: 0.1
+            },
+        ]
+        };
+        const config = {
+            type: 'line',
+            data: data,
+        };
+
+        const myChart = new Chart(
+        document.getElementById('ventasYgastos'),
+        config
+      );
+    }
+  fetchVentasAgno()
+
 </script>
 <script>
 
