@@ -95,18 +95,11 @@ Route::middleware(['auth'])->group(function () {
     // TAG
     Route::prefix('tag')->group(function () {
         Route::get('/', [TagController::class, 'index'])->name('tag.index');
-        // Route::get('/preparar-venta', [SaleController::class, 'prepararVenta'])->name('sales.prepararVenta');
-        // Route::get('/venta-con-nuevo-cliente', [SaleController::class, 'createWithNewClient'])->name('sales.create-with-new-client');
-        // Route::post('/store', [SaleController::class, 'store'])->name('sales.store');
-        // Route::get('/ver/{sale}', [SaleController::class, 'show'])->name('sales.show');
-        // Route::put('/update/{sale}', [SaleController::class, 'update'])->name('sales.update');
-        // Route::post('/delete/{sale}', [SaleController::class, 'destroy'])->name('sales.destroy');
-        // Route::get('/buscar', [SaleController::class, 'query'])->name('sales.query');
-        // Route::get('/crear', [SaleController::class, 'create'])->name('sales.create');
-        // Route::get('/por-cobrar', [SaleController::class, 'toPay'])->name('sales.toPay');
-        // Route::get('/buscar-por-pagar', [SaleController::class, 'queryToPay'])->name('sales.queryToPay');
-        // Route::get('/invoce/{sale}', [SaleController::class, 'getInvoice'])->name('sales.getInvoice');
-        // Route::put('/update-status/{sale}', [SaleController::class, 'updateStatus'])->name('sales.updateStatus');
+        Route::get('/crear', [TagController::class, 'create'])->name('tag.create');
+        Route::post('/store', [TagController::class, 'store'])->name('tag.store');
+        Route::post('/delete/{tag}', [TagController::class, 'destroy'])->name('tag.destroy');
+        Route::put('/update/{tag}', [TagController::class, 'update'])->name('tag.update');
+        Route::get('/editar/{tag}', [TagController::class, 'edit'])->name('tag.edit');
     });
 
     // Users

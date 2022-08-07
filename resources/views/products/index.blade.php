@@ -63,6 +63,8 @@
                 <a href="{{ route('products.create') }}" type="button" class="btn btn-success">Agregar nuevo
                     producto</a>
                 @endif
+                <a href="{{ route('tag.create') }}" type="button" class="btn btn-success">Agregar nuevo
+                    tag</a>
             </div>
         </div>
 

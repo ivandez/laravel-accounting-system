@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -15,7 +16,11 @@ class TagController extends Controller
     {
         $section = "Tags";
 
-        return view('tag.index', compact('section'));
+        $tags = Tag::paginate(15);
+
+        $tagsCount = Tag::count();
+
+        return view('tag.index', compact('section', 'tagsCount', 'tags'));
     }
 
     /**
@@ -25,7 +30,9 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        $section = "Crear tags";
+
+        return view('tag.create', compact('section'));
     }
 
     /**
@@ -36,7 +43,13 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = new Tag();
+
+        $tag->name = $request->nombre;
+
+        $tag->save();
+
+        return redirect()->route('tag.index')->with('success', 'Tag creado exitosamente!');
     }
 
     /**
@@ -56,9 +69,11 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        $section = 'Editar tag';
+
+        return view('tag.edit', compact(['tag', 'section']));
     }
 
     /**
@@ -68,9 +83,17 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:254'
+        ]);
+
+        $tag->name = $request->nombre;
+
+        $tag->save();
+
+        return redirect()->route('tag.index')->with('success', 'Tag actualizado exitosamente!');
     }
 
     /**
@@ -79,8 +102,14 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        //
+        try {
+            $tag->delete();
+        } catch (\Exception $e) {
+            return redirect()->route('tag.index')->with('fail', 'No se puede eliminar el tag porque tiene productos asociados');
+        }
+
+        return redirect()->route('tag.index')->with('success', 'Tag eliminado exitosamente!');
     }
 }

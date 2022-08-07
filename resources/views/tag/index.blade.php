@@ -47,7 +47,7 @@
             <div class="col">
                 @if(auth()->user()->rol == 1)
 
-                <a href="{{ route('products.create') }}" type="button" class="btn btn-success">Agregar nuevo
+                <a href="{{ route('tag.create') }}" type="button" class="btn btn-success">Agregar nuevo
                     tag</a>
                 @endif
             </div>
@@ -64,13 +64,13 @@
 
         <div class="row mt-3">
             <div class="col">
-                <x-products-table :products="[]"/>
+                <x-tags-table :tags="$tags"/>
             </div>
         </div>
 
         <div class="row text-center">
             <div class="col">
-                {{-- {{ $products->links() }} --}}
+                {{ $tags->links() }}
             </div>
         </div>
 
