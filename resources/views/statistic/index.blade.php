@@ -11,9 +11,11 @@
         </div>
 
         <div class="row my-3">
-            <div class="col">
+            <div class="col text-center">
+                <h2>Deudas por cobrar</h2>
                 <canvas id="deudasPorCobrar"></canvas>
             </div>
+
             <div class="col">
                 <canvas id="deudasPorPagar"></canvas>
             </div>
@@ -92,18 +94,21 @@
     configPiePorPagar
   );
 
-  axios.get("http://localhost/api/tests").then(res => console.log(res));
 </script>
 <script>
+
+const fetchData = async () => {
+    const {data} = await axios.get("http://localhost/api/deudas-por-cobrar")
+    console.log("🚀 ~ file: index.blade.php ~ line 102 ~ fetchData ~ response", data)
+
     const dataPie = {
         labels: [
-            'Red',
-            'Blue',
-            'Yellow'
+            'Deudas por cobrar',
+            'Deudas pagadas',
         ],
         datasets: [{
             label: 'My First Dataset',
-            data: [300, 50, 100],
+            data: [data.toPay, data.isPaid],
             backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
@@ -121,7 +126,11 @@
     const myChartPie = new Chart(
     document.getElementById('deudasPorCobrar'),
     configPie
-  );
+    );
+}
+
+fetchData()
+
 </script>
 <script>
     const dataBar = {

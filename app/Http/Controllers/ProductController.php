@@ -75,7 +75,10 @@ class ProductController extends Controller
 
         $tag = Tag::find($request->tag);
 
-        $product->tag_id = $tag->id;
+        if ($tag) {
+
+            $product->tag_id = $tag->id;
+        }
 
         $product->save();
 

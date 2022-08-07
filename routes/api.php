@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,7 +53,13 @@ Route::post('/expenses/store', [\App\Http\Controllers\ExpenseController::class, 
 Route::post('/reporte-productos', [\App\Http\Controllers\ReportController::class, 'getProductos']);
 
 // Estadisticas
-Route::get('tests', function () {
+Route::get('deudas-por-cobrar', function () {
 
-    return response()->json('jeje');
+    $sales = Sale::where('is_paid', false)->get()->count();
+
+    $salesPagadas = Sale::where('is_paid', true)->get()->count();
+
+    $response = ['toPay' => $sales, 'isPaid' => $salesPagadas];
+
+    return response()->json($response);
 });
