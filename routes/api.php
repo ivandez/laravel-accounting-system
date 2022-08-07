@@ -115,3 +115,12 @@ Route::get('ventas-del-agno', function () {
 
     return response()->json($asd);
 });
+
+Route::get('gastos-del-agno', function () {
+
+    $asd = Expense::where('is_paid', true)->get();
+
+    $collection = collect($asd);
+
+    return response()->json($collection);
+});

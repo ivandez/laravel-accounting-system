@@ -91,6 +91,19 @@ return grupos
         } )
        return months
     }
+    const gropuByMonthGastos = (arr, months) => {
+
+        arr.forEach(item => {
+
+            const month = item.date.split('-')
+
+            const mIndex = months.findIndex((m) => m.month === month[1])
+
+            months[mIndex].data.push(item)
+
+        } )
+       return months
+    }
 
     const sumarMeses = (arr) => {
         let sales2 = []
@@ -113,12 +126,45 @@ return grupos
 
         return sales2.sort(function(a, b){return a.month-b.month})
     }
+    const sumarMesesGastos = (arr) => {
+        let sales2 = []
+
+        arr.forEach(item => {
+
+            const sales = item.data.reduce(
+                (previousValue, currentValue) => previousValue + parseInt(currentValue.amount),
+                0
+                );
+
+            let newArr = {
+                month: item.month,
+                sales: sales
+            }
+
+            sales2.push(newArr)
+
+        } )
+
+        return sales2.sort(function(a, b){return a.month-b.month})
+    }
 
     const fetchVentasAgno = async () => {
         const {data:dataVEntas} = await axios.get('/api/ventas-del-agno');
         const months = orderByMonth(dataVEntas)
         const groudByMeses = gropuByMonth(dataVEntas, months)
         const sales = sumarMeses(groudByMeses)
+
+
+        //gastos
+        const {data:dataGastos} = await axios.get('/api/gastos-del-agno');
+        const monthsGastos = orderByMonth(dataGastos)
+        const groudByMesesGastos = gropuByMonthGastos(dataGastos, monthsGastos)
+        const gastos = sumarMesesGastos(groudByMesesGastos)
+        console.log("🚀 ~ file: index.blade.php ~ line 163 ~ fetchVentasAgno ~ gastos", gastos)
+
+
+
+
 
         const data = {
             labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -132,7 +178,7 @@ return grupos
             },
                 {
                 label: 'Gastos',
-                data: [60,40,100,200,300,50,20],
+                data: [gastos[0].sales, gastos[1].sales, gastos[2].sales, gastos[3].sales, gastos[4].sales, gastos[5].sales, gastos[6].sales, gastos[7].sales, gastos[8].sales, gastos[9].sales, gastos[10].sales],
                 fill: false,
                 borderColor: '#F04104',
                 tension: 0.1
